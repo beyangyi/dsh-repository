@@ -1,0 +1,69 @@
+{
+  "rules": {
+    "untrackedMaxSeconds": {"wide": 500, "tele": 300, "rule": "广角（中位焦距 ≤ 35mm）按 500 法则、长焦按更保守的 300 法则：曝光 = 法则值 ÷ 等效焦距"},
+    "wideFocalLimit": 35,
+    "isoByBortle": {"1": 1600, "2": 1600, "3": 3200, "4": 3200, "5": 6400, "6": 6400, "7": 6400, "8": 6400, "9": 6400},
+    "frames": {
+      "deepsky": {"untracked": 80, "tracked": 20},
+      "milkyway": {"untracked": 1, "tracked": 1},
+      "startrail": {"untracked": 120, "tracked": 0},
+      "meteor": {"untracked": 0, "tracked": 0},
+      "comet": {"untracked": 40, "tracked": 30},
+      "planet": {"untracked": 0, "tracked": 0},
+      "solarEclipse": {"untracked": 0, "tracked": 0},
+      "lunarEclipse": {"untracked": 0, "tracked": 0},
+      "opposition": {"untracked": 0, "tracked": 0},
+      "elongation": {"untracked": 0, "tracked": 0},
+      "conjunction": {"untracked": 0, "tracked": 0},
+      "aurora": {"untracked": 30, "tracked": 30}
+    },
+    "planetLike": {"exposureSec": 0.05, "frames": 500, "iso": 800, "exposureText": "1/20 s × 500 帧"},
+    "conjunction": {
+      "fovMargin": 1.8, "zoomRatio": 0.55, "minFocal": 50, "maxFocal": 2000,
+      "moonRadiusDeg": 0.26, "sensorShortSide": 24,
+      "trackerFocal": 400, "trackedSeconds": 5, "trackedFrames": 20, "untrackedFrames": 20, "iso": 800,
+      "model": "两颗天体（含整轮月亮）必须同框：张角 = 角距 + 月亮半径，视场 = 张角×1.8，焦段 = 24 / (2·tan(视场/2))；长焦端 ≥ 400mm 且不含月亮时必须上赤道仪"
+    },
+    "bright": {
+      "moon": {
+        "fNumber": 11, "iso": 100, "seconds": 0.01, "isoUsed": 400, "totalityMagDrop": 13,
+        "model": "Looney 11（f/11·ISO 100 = 1/100 s）→ 按 f 值与 ISO 换算，再按食分 2^(13·食分^1.5) 压暗"
+      },
+      "sun": {
+        "fNumber": 8, "iso": 100, "seconds": 0.001, "isoUsed": 400,
+        "model": "巴德膜 ND5 经验值（f/8·ISO 100 = 1/1000 s）→ 按 f 值与 ISO 换算"
+      },
+      "aurora": {
+        "fNumber": 2.8, "iso": 1600, "seconds": 4, "isoUsed": 1600,
+        "model": "极光经验曝光（f/2.8·ISO 1600 = 4 s，强 Kp 减半、弱 Kp 加倍）"
+      }
+    },
+    "apertureByType": {
+      "milkyway": "f/2.8",
+      "deepsky": "f/4",
+      "meteor": "f/2.8",
+      "comet": "f/2.8",
+      "startrail": "f/4",
+      "planet": "f/10",
+      "solarEclipse": "f/8",
+      "lunarEclipse": "f/5.6",
+      "opposition": "f/10",
+      "elongation": "f/10",
+      "conjunction": "f/5.6"
+    },
+    "moon": {
+      "deepskyMaxIllum": 12,
+      "milkywayMaxIllum": 15,
+      "startrailIgnoresMoon": true
+    }
+  },
+  "notes": {
+    "tracker": "有赤道仪时单张可到 60–180s，叠加 15–30 张",
+    "untracked": "无赤道仪走短曝多叠，单张按 500 法则：500 ÷ 等效焦距（秒），APS-C 按 1.5× 裁切换算",
+    "moon": "月面按 Looney 11（f/11·ISO 100 = 1/100 s）算基准；食分越大越暗，全食阶段约压暗 13 档、单张到数秒",
+    "aurora": "极光靠短曝光冻结结构：f/2.8·ISO 1600 约 4 s，强 Kp 减半、弱 Kp 加倍",
+    "focus": "手动对焦亮星 10× 放大，关防抖",
+    "dew": "露点差 <2℃ 必须上加热带",
+    "solar": "日食必须全程使用巴德膜/ND5 减光，肉眼直视会永久损伤视网膜；偏食阶段曝光 1/500–1/2000s，包围 ±2EV"
+  }
+}

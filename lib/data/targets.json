@@ -1,0 +1,1536 @@
+{
+ "targets": [
+  {
+   "id": "m31",
+   "name": "M31 仙女座大星系",
+   "en": "Andromeda Galaxy",
+   "type": "deepsky",
+   "raH": 0.712,
+   "dec": 41.27,
+   "sizeDeg": 3,
+   "minBortle": 4,
+   "months": [
+    8,
+    1
+   ],
+   "focalFF": [
+    135,
+    300
+   ],
+   "tracker": false,
+   "fg": "低山脊线或树线",
+   "tips": "21:00 前后中天，长曝需赤道仪",
+   "subtype": "galaxy"
+  },
+  {
+   "id": "m33",
+   "name": "M33 三角座星系",
+   "en": "Triangulum Galaxy",
+   "type": "deepsky",
+   "raH": 1.564,
+   "dec": 30.66,
+   "sizeDeg": 1.2,
+   "minBortle": 2,
+   "months": [
+    8,
+    1
+   ],
+   "focalFF": [
+    200,
+    400
+   ],
+   "tracker": true,
+   "fg": "开阔北天",
+   "tips": "表面亮度低，必须暗夜",
+   "subtype": "galaxy"
+  },
+  {
+   "id": "m42",
+   "name": "M42 猎户座大星云",
+   "en": "Orion Nebula",
+   "type": "deepsky",
+   "raH": 5.588,
+   "dec": -5.39,
+   "sizeDeg": 1.5,
+   "minBortle": 3,
+   "months": [
+    10,
+    3
+   ],
+   "focalFF": [
+    135,
+    200
+   ],
+   "tracker": false,
+   "fg": "树线与山脊",
+   "tips": "核心与外围分开曝光做 HDR",
+   "subtype": "nebula"
+  },
+  {
+   "id": "ic434",
+   "name": "IC434 马头星云",
+   "en": "Horsehead Nebula",
+   "type": "deepsky",
+   "raH": 5.683,
+   "dec": -2.46,
+   "sizeDeg": 0.6,
+   "minBortle": 2,
+   "months": [
+    11,
+    2
+   ],
+   "focalFF": [
+    200,
+    300
+   ],
+   "tracker": true,
+   "fg": "猎户腰带方向",
+   "tips": "需 Hα 或长总曝光",
+   "subtype": "nebula"
+  },
+  {
+   "id": "barnard",
+   "name": "巴纳德环",
+   "en": "Barnard's Loop",
+   "type": "deepsky",
+   "raH": 5.53,
+   "dec": -3,
+   "sizeDeg": 10,
+   "minBortle": 2,
+   "months": [
+    11,
+    2
+   ],
+   "focalFF": [
+    50,
+    85
+   ],
+   "tracker": true,
+   "fg": "猎户全景",
+   "tips": "广域 + Hα 最佳",
+   "subtype": "nebula"
+  },
+  {
+   "id": "m45",
+   "name": "M45 昴星团",
+   "en": "Pleiades",
+   "type": "deepsky",
+   "raH": 3.783,
+   "dec": 24.12,
+   "sizeDeg": 2,
+   "minBortle": 4,
+   "months": [
+    9,
+    3
+   ],
+   "focalFF": [
+    135,
+    300
+   ],
+   "tracker": false,
+   "fg": "树线剪影",
+   "tips": "总曝光 ≥30 分钟出反射星云",
+   "subtype": "cluster"
+  },
+  {
+   "id": "ngc7000",
+   "name": "NGC7000 北美洲星云",
+   "en": "North America Nebula",
+   "type": "deepsky",
+   "raH": 20.983,
+   "dec": 44.53,
+   "sizeDeg": 3,
+   "minBortle": 3,
+   "months": [
+    6,
+    10
+   ],
+   "focalFF": [
+    85,
+    135
+   ],
+   "tracker": true,
+   "fg": "天鹅座方向",
+   "tips": "蓝调时段拍最稳",
+   "subtype": "nebula"
+  },
+  {
+   "id": "ic5070",
+   "name": "IC5070 鹈鹕星云",
+   "en": "Pelican Nebula",
+   "type": "deepsky",
+   "raH": 20.85,
+   "dec": 44.35,
+   "sizeDeg": 1.5,
+   "minBortle": 3,
+   "months": [
+    6,
+    10
+   ],
+   "focalFF": [
+    135,
+    200
+   ],
+   "tracker": true,
+   "fg": "天鹅座方向",
+   "tips": "与北美洲同场",
+   "subtype": "nebula"
+  },
+  {
+   "id": "ngc1499",
+   "name": "NGC1499 加州星云",
+   "en": "California Nebula",
+   "type": "deepsky",
+   "raH": 4,
+   "dec": 36.37,
+   "sizeDeg": 2.5,
+   "minBortle": 2,
+   "months": [
+    10,
+    2
+   ],
+   "focalFF": [
+    135,
+    200
+   ],
+   "tracker": true,
+   "fg": "低山脊",
+   "tips": "Hα 滤镜显著提升",
+   "subtype": "nebula"
+  },
+  {
+   "id": "ic1396",
+   "name": "IC1396 象鼻星云",
+   "en": "Elephant's Trunk",
+   "type": "deepsky",
+   "raH": 21.633,
+   "dec": 57.5,
+   "sizeDeg": 3,
+   "minBortle": 2,
+   "months": [
+    7,
+    11
+   ],
+   "focalFF": [
+    135,
+    300
+   ],
+   "tracker": true,
+   "fg": "仙王座方向",
+   "tips": "前半夜目标",
+   "subtype": "nebula"
+  },
+  {
+   "id": "ngc869",
+   "name": "NGC869/884 英仙双星团",
+   "en": "Double Cluster",
+   "type": "deepsky",
+   "raH": 2.316,
+   "dec": 57.13,
+   "sizeDeg": 1,
+   "minBortle": 4,
+   "months": [
+    8,
+    2
+   ],
+   "focalFF": [
+    135,
+    200
+   ],
+   "tracker": false,
+   "fg": "松林剪影",
+   "tips": "流星间隙的稳妥目标",
+   "subtype": "cluster"
+  },
+  {
+   "id": "ngc2237",
+   "name": "NGC2237 玫瑰星云",
+   "en": "Rosette Nebula",
+   "type": "deepsky",
+   "raH": 6.533,
+   "dec": 4.95,
+   "sizeDeg": 1.5,
+   "minBortle": 2,
+   "months": [
+    11,
+    3
+   ],
+   "focalFF": [
+    200,
+    400
+   ],
+   "tracker": true,
+   "fg": "麒麟座方向",
+   "tips": "需要长总曝光",
+   "subtype": "nebula"
+  },
+  {
+   "id": "ngc6960",
+   "name": "NGC6960 面纱星云",
+   "en": "Veil Nebula",
+   "type": "deepsky",
+   "raH": 20.76,
+   "dec": 30.72,
+   "sizeDeg": 3,
+   "minBortle": 2,
+   "months": [
+    7,
+    11
+   ],
+   "focalFF": [
+    135,
+    300
+   ],
+   "tracker": true,
+   "fg": "天鹅座方向",
+   "tips": "OIII 滤镜效果好",
+   "subtype": "nebula"
+  },
+  {
+   "id": "m13",
+   "name": "M13 武仙座球团",
+   "en": "Hercules Cluster",
+   "type": "deepsky",
+   "raH": 16.695,
+   "dec": 36.46,
+   "sizeDeg": 0.3,
+   "minBortle": 4,
+   "months": [
+    4,
+    9
+   ],
+   "focalFF": [
+    300,
+    800
+   ],
+   "tracker": true,
+   "fg": "开阔北天",
+   "tips": "小目标，需要长焦",
+   "subtype": "cluster"
+  },
+  {
+   "id": "m27",
+   "name": "M27 哑铃星云",
+   "en": "Dumbbell Nebula",
+   "type": "deepsky",
+   "raH": 19.993,
+   "dec": 22.72,
+   "sizeDeg": 0.15,
+   "minBortle": 4,
+   "months": [
+    6,
+    10
+   ],
+   "focalFF": [
+    400,
+    1000
+   ],
+   "tracker": true,
+   "fg": "狐狸座方向",
+   "tips": "行星状星云，需要长焦",
+   "subtype": "planetary"
+  },
+  {
+   "id": "m81",
+   "name": "M81/M82 星系对",
+   "en": "Bode's Galaxies",
+   "type": "deepsky",
+   "raH": 9.93,
+   "dec": 69.07,
+   "sizeDeg": 0.5,
+   "minBortle": 3,
+   "months": [
+    1,
+    6
+   ],
+   "focalFF": [
+    300,
+    600
+   ],
+   "tracker": true,
+   "fg": "大熊座方向",
+   "tips": "高纬目标，整夜可见",
+   "subtype": "galaxy"
+  },
+  {
+   "id": "sgrA",
+   "name": "SgrA* 银心",
+   "en": "Galactic Center",
+   "type": "milkyway",
+   "raH": 17.761,
+   "dec": -29.01,
+   "sizeDeg": 10,
+   "minBortle": 3,
+   "months": [
+    3,
+    9
+   ],
+   "focalFF": [
+    14,
+    24
+   ],
+   "tracker": false,
+   "fg": "南向低地平线",
+   "tips": "11 月已落到地平线下，不可拍"
+  },
+  {
+   "id": "wintermw",
+   "name": "冬季银河拱桥",
+   "en": "Winter Milky Way Arch",
+   "type": "milkyway",
+   "raH": 5.5,
+   "dec": 20,
+   "sizeDeg": 60,
+   "minBortle": 4,
+   "months": [
+    10,
+    2
+   ],
+   "focalFF": [
+    14,
+    24
+   ],
+   "tracker": false,
+   "fg": "低地平线群山或草原",
+   "tips": "天鹅—仙后—英仙—御夫—猎户连拱"
+  },
+  {
+   "id": "summermw",
+   "name": "夏季银河（银心区）",
+   "en": "Summer Milky Way",
+   "type": "milkyway",
+   "raH": 18,
+   "dec": -10,
+   "sizeDeg": 40,
+   "minBortle": 3,
+   "months": [
+    5,
+    9
+   ],
+   "focalFF": [
+    14,
+    24
+   ],
+   "tracker": false,
+   "fg": "南向地景",
+   "tips": "夏季核心题材"
+  },
+  {
+   "id": "zodiacal-spring",
+   "name": "春季黄道光",
+   "en": "Zodiacal Light (Spring)",
+   "type": "zodiacal",
+   "raH": 0.5,
+   "dec": 10,
+   "sizeDeg": 40,
+   "minBortle": 1,
+   "months": [
+    2,
+    4
+   ],
+   "focalFF": [
+    14,
+    24
+   ],
+   "tracker": false,
+   "fg": "西向开阔地平线",
+   "tips": "黄昏后西方低空锥形光，晚霞散尽 1–2 小时内，需无月极暗"
+  },
+  {
+   "id": "zodiacal-autumn",
+   "name": "秋季黄道光",
+   "en": "Zodiacal Light (Autumn)",
+   "type": "zodiacal",
+   "raH": 10.5,
+   "dec": 8,
+   "sizeDeg": 40,
+   "minBortle": 1,
+   "months": [
+    9,
+    11
+   ],
+   "focalFF": [
+    14,
+    24
+   ],
+   "tracker": false,
+   "fg": "东向开阔地平线",
+   "tips": "黎明前东方低空锥形光，天文晨光开始前 1–2 小时，需无月极暗"
+  },
+  {
+   "id": "startrail",
+   "name": "星轨",
+   "en": "Star Trails",
+   "type": "startrail",
+   "raH": 2,
+   "dec": 89,
+   "sizeDeg": 90,
+   "minBortle": 8,
+   "months": [
+    1,
+    12
+   ],
+   "focalFF": [
+    16,
+    35
+   ],
+   "tracker": false,
+   "fg": "北天极地景或南天弧线",
+   "tips": "30s×120 张堆栈"
+  },
+  {
+   "id": "aurora",
+   "name": "极光",
+   "en": "Aurora",
+   "type": "aurora",
+   "raH": 0,
+   "dec": 70,
+   "sizeDeg": 90,
+   "minBortle": 3,
+   "months": [
+    9,
+    4
+   ],
+   "focalFF": [
+    14,
+    35
+   ],
+   "tracker": false,
+   "fg": "北向开阔地平线",
+   "tips": "仅北纬 42° 以上站点有意义，需 Kp≥7 地磁暴，按空间天气预报确认"
+  },
+  {
+   "id": "tauN",
+   "name": "金牛座北流星雨",
+   "en": "Northern Taurids",
+   "type": "meteor",
+   "raH": 3.83,
+   "dec": 22,
+   "sizeDeg": 90,
+   "minBortle": 4,
+   "months": [
+    10,
+    12
+   ],
+   "focalFF": [
+    14,
+    20
+   ],
+   "tracker": false,
+   "fg": "任意低地平线",
+   "tips": "ZHR 低但火流星多"
+  },
+  {
+   "id": "tauS",
+   "name": "金牛座南流星雨",
+   "en": "Southern Taurids",
+   "type": "meteor",
+   "raH": 3.5,
+   "dec": 13,
+   "sizeDeg": 90,
+   "minBortle": 4,
+   "months": [
+    9,
+    12
+   ],
+   "focalFF": [
+    14,
+    20
+   ],
+   "tracker": false,
+   "fg": "任意低地平线",
+   "tips": "与北金牛叠加，活跃期长"
+  },
+  {
+   "id": "leonids",
+   "name": "狮子座流星雨",
+   "en": "Leonids",
+   "type": "meteor",
+   "raH": 10.17,
+   "dec": 22,
+   "sizeDeg": 90,
+   "minBortle": 5,
+   "months": [
+    11,
+    11
+   ],
+   "focalFF": [
+    14,
+    20
+   ],
+   "tracker": false,
+   "fg": "任意低地平线",
+   "tips": "午夜后辐射点升高"
+  },
+  {
+   "id": "geminids",
+   "name": "双子座流星雨",
+   "en": "Geminids",
+   "type": "meteor",
+   "raH": 7.47,
+   "dec": 32,
+   "sizeDeg": 90,
+   "minBortle": 4,
+   "months": [
+    12,
+    12
+   ],
+   "focalFF": [
+    14,
+    20
+   ],
+   "tracker": false,
+   "fg": "任意低地平线",
+   "tips": "全年最强，ZHR 120"
+  },
+  {
+   "id": "perseids",
+   "name": "英仙座流星雨",
+   "en": "Perseids",
+   "type": "meteor",
+   "raH": 3.13,
+   "dec": 58,
+   "sizeDeg": 90,
+   "minBortle": 4,
+   "months": [
+    7,
+    8
+   ],
+   "focalFF": [
+    14,
+    20
+   ],
+   "tracker": false,
+   "fg": "任意低地平线",
+   "tips": "夏季经典，月相决定成败"
+  },
+  {
+   "id": "quadrantids",
+   "name": "象限仪流星雨",
+   "en": "Quadrantids",
+   "type": "meteor",
+   "raH": 15.33,
+   "dec": 49,
+   "sizeDeg": 90,
+   "minBortle": 4,
+   "months": [
+    12,
+    1
+   ],
+   "focalFF": [
+    14,
+    20
+   ],
+   "tracker": false,
+   "fg": "北向低地平线",
+   "tips": "极大期短，需卡点"
+  },
+  {
+   "id": "draconids",
+   "name": "天龙座流星雨",
+   "en": "Draconids",
+   "type": "meteor",
+   "raH": 17.47,
+   "dec": 54,
+   "sizeDeg": 90,
+   "minBortle": 4,
+   "months": [
+    10,
+    10
+   ],
+   "focalFF": [
+    14,
+    20
+   ],
+   "tracker": false,
+   "fg": "北向低地平线",
+   "tips": "偶发爆发型，ZHR 通常 10，爆发年可达数百"
+  },
+  {
+   "id": "orionids",
+   "name": "猎户座流星雨",
+   "en": "Orionids",
+   "type": "meteor",
+   "raH": 6.35,
+   "dec": 16,
+   "sizeDeg": 90,
+   "minBortle": 4,
+   "months": [
+    10,
+    11
+   ],
+   "focalFF": [
+    14,
+    20
+   ],
+   "tracker": false,
+   "fg": "任意低地平线",
+   "tips": "哈雷彗星母体，快速流星，黎明前最佳"
+  },
+  {
+   "id": "ursids",
+   "name": "小熊座流星雨",
+   "en": "Ursids",
+   "type": "meteor",
+   "raH": 14.47,
+   "dec": 75,
+   "sizeDeg": 90,
+   "minBortle": 4,
+   "months": [
+    12,
+    12
+   ],
+   "focalFF": [
+    14,
+    20
+   ],
+   "tracker": false,
+   "fg": "北向低地平线",
+   "tips": "北天小流量，整夜可见"
+  },
+  {
+   "id": "lyrids",
+   "name": "天琴座流星雨",
+   "en": "Lyrids",
+   "type": "meteor",
+   "raH": 18.17,
+   "dec": 34,
+   "sizeDeg": 90,
+   "minBortle": 4,
+   "months": [
+    4,
+    4
+   ],
+   "focalFF": [
+    14,
+    20
+   ],
+   "tracker": false,
+   "fg": "任意低地平线",
+   "tips": "撒切尔彗星母体，后半夜辐射点高"
+  },
+  {
+   "id": "etaAquariids",
+   "name": "宝瓶座η流星雨",
+   "en": "Eta Aquariids",
+   "type": "meteor",
+   "raH": 22.5,
+   "dec": -1,
+   "sizeDeg": 90,
+   "minBortle": 4,
+   "months": [
+    4,
+    5
+   ],
+   "focalFF": [
+    14,
+    20
+   ],
+   "tracker": false,
+   "fg": "东向低地平线",
+   "tips": "哈雷彗星母体，黎明前 1–2 小时最佳"
+  },
+  {
+   "id": "jupiter",
+   "name": "木星",
+   "en": "Jupiter",
+   "type": "planet",
+   "body": "Jupiter",
+   "sizeDeg": 0.011,
+   "minBortle": 7,
+   "months": [
+    1,
+    12
+   ],
+   "focalFF": [
+    300,
+    2000
+   ],
+   "tracker": false,
+   "fg": "任意地景（长焦）",
+   "tips": "400mm 可见小圆面，1200mm+ 见云带"
+  },
+  {
+   "id": "mars",
+   "name": "火星",
+   "en": "Mars",
+   "type": "planet",
+   "body": "Mars",
+   "sizeDeg": 0.006,
+   "minBortle": 7,
+   "months": [
+    1,
+    12
+   ],
+   "focalFF": [
+    300,
+    2000
+   ],
+   "tracker": false,
+   "fg": "与木星同框",
+   "tips": "视直径小，需要长焦"
+  },
+  {
+   "id": "saturn",
+   "name": "土星",
+   "en": "Saturn",
+   "type": "planet",
+   "body": "Saturn",
+   "sizeDeg": 0.009,
+   "minBortle": 7,
+   "months": [
+    1,
+    12
+   ],
+   "focalFF": [
+    600,
+    2000
+   ],
+   "tracker": false,
+   "fg": "任意地景（长焦）",
+   "tips": "环倾角小，需要口径"
+  },
+  {
+   "id": "venus",
+   "name": "金星",
+   "en": "Venus",
+   "type": "planet",
+   "body": "Venus",
+   "sizeDeg": 0.011,
+   "minBortle": 7,
+   "months": [
+    1,
+    12
+   ],
+   "focalFF": [
+    300,
+    800
+   ],
+   "tracker": false,
+   "fg": "晨昏低空地景",
+   "tips": "相位随距角变化"
+  },
+  {
+   "id": "lunareclipse",
+   "name": "月食",
+   "en": "Lunar Eclipse",
+   "type": "lunarEclipse",
+   "body": "Moon",
+   "sizeDeg": 0.5,
+   "minBortle": 8,
+   "months": [
+    1,
+    12
+   ],
+   "focalFF": [
+    200,
+    800
+   ],
+   "tracker": false,
+   "fg": "地景同框",
+   "tips": "按事件表日期，全食阶段可拍红月"
+  },
+  {
+   "id": "solareclipse",
+   "name": "日食",
+   "en": "Solar Eclipse",
+   "type": "solarEclipse",
+   "body": "Sun",
+   "sizeDeg": 0.5,
+   "minBortle": 9,
+   "months": [
+    1,
+    12
+   ],
+   "focalFF": [
+    200,
+    800
+   ],
+   "tracker": false,
+   "fg": "西向/东向开阔地平线",
+   "tips": "镜头前必须加巴德膜或 ND5 减光，包围曝光，切勿肉眼直视"
+  },
+  {
+   "id": "m51",
+   "name": "M51 涡状星系",
+   "en": "Whirlpool Galaxy",
+   "type": "deepsky",
+   "subtype": "galaxy",
+   "raH": 13.498,
+   "dec": 47.2,
+   "sizeDeg": 0.2,
+   "minBortle": 3,
+   "months": [
+    3,
+    9
+   ],
+   "focalFF": [
+    200,
+    400
+   ],
+   "tracker": true,
+   "fg": "大熊座方向",
+   "tips": "与伴星系 NGC5195 同框，需暗夜与长总曝光"
+  },
+  {
+   "id": "m101",
+   "name": "M101 风车星系",
+   "en": "Pinwheel Galaxy",
+   "type": "deepsky",
+   "subtype": "galaxy",
+   "raH": 14.053,
+   "dec": 54.35,
+   "sizeDeg": 0.4,
+   "minBortle": 2,
+   "months": [
+    3,
+    9
+   ],
+   "focalFF": [
+    200,
+    400
+   ],
+   "tracker": true,
+   "fg": "大熊座方向",
+   "tips": "表面亮度极低，Bortle 3 以上基本拍不出旋臂"
+  },
+  {
+   "id": "m44",
+   "name": "M44 蜂巢星团",
+   "en": "Beehive Cluster",
+   "type": "deepsky",
+   "subtype": "cluster",
+   "raH": 8.673,
+   "dec": 19.98,
+   "sizeDeg": 1.6,
+   "minBortle": 5,
+   "months": [
+    12,
+    4
+   ],
+   "focalFF": [
+    135,
+    300
+   ],
+   "tracker": false,
+   "fg": "巨蟹座方向",
+   "tips": "肉眼可见，广角短曝即可出片"
+  },
+  {
+   "id": "m11",
+   "name": "M11 野鸭星团",
+   "en": "Wild Duck Cluster",
+   "type": "deepsky",
+   "subtype": "cluster",
+   "raH": 18.852,
+   "dec": -6.27,
+   "sizeDeg": 0.25,
+   "minBortle": 3,
+   "months": [
+    6,
+    9
+   ],
+   "focalFF": [
+    300,
+    800
+   ],
+   "tracker": true,
+   "fg": "盾牌座方向（南向低空）",
+   "tips": "南向低空，务必避开城市光害方向"
+  },
+  {
+   "id": "m57",
+   "name": "M57 环状星云",
+   "en": "Ring Nebula",
+   "type": "deepsky",
+   "subtype": "planetary",
+   "raH": 18.893,
+   "dec": 33.03,
+   "sizeDeg": 0.02,
+   "minBortle": 3,
+   "months": [
+    5,
+    10
+   ],
+   "focalFF": [
+    600,
+    1500
+   ],
+   "tracker": true,
+   "fg": "天琴座方向",
+   "tips": "行星状星云，长焦 + 高倍才能分辨环结构"
+  },
+  {
+   "id": "ngc2392",
+   "name": "NGC2392 爱斯基摩星云",
+   "en": "Eskimo Nebula",
+   "type": "deepsky",
+   "subtype": "planetary",
+   "raH": 7.486,
+   "dec": 20.91,
+   "sizeDeg": 0.02,
+   "minBortle": 4,
+   "months": [
+    12,
+    3
+   ],
+   "focalFF": [
+    600,
+    1500
+   ],
+   "tracker": true,
+   "fg": "双子座方向",
+   "tips": "小行星状星云，中心星与外围壳层分开曝光"
+  },
+  {
+   "id": "m104",
+   "name": "M104 草帽星系",
+   "en": "Sombrero Galaxy",
+   "type": "deepsky",
+   "subtype": "galaxy",
+   "raH": 12.6667,
+   "dec": -11.62,
+   "sizeDeg": 0.15,
+   "minBortle": 3,
+   "months": [
+    2,
+    7
+   ],
+   "focalFF": [
+    400,
+    1200
+   ],
+   "tracker": true,
+   "fg": "室女座方向",
+   "tips": "侧向星系，尘埃带细，需长焦 + 暗夜"
+  },
+  {
+   "id": "m106",
+   "name": "M106 猎犬座星系",
+   "en": "M106",
+   "type": "deepsky",
+   "subtype": "galaxy",
+   "raH": 12.3167,
+   "dec": 47.3,
+   "sizeDeg": 0.3,
+   "minBortle": 2,
+   "months": [
+    2,
+    8
+   ],
+   "focalFF": [
+    300,
+    800
+   ],
+   "tracker": true,
+   "fg": "猎犬座方向",
+   "tips": "旋臂弱，靠总曝光而非单张"
+  },
+  {
+   "id": "ngc4565",
+   "name": "NGC4565 针状星系",
+   "en": "Needle Galaxy",
+   "type": "deepsky",
+   "subtype": "galaxy",
+   "raH": 12.6067,
+   "dec": 25.99,
+   "sizeDeg": 0.5,
+   "minBortle": 2,
+   "months": [
+    3,
+    8
+   ],
+   "focalFF": [
+    300,
+    800
+   ],
+   "tracker": true,
+   "fg": "后发座方向",
+   "tips": "细长侧向星系，长焦端最出效果"
+  },
+  {
+   "id": "m63",
+   "name": "M63 向日葵星系",
+   "en": "Sunflower Galaxy",
+   "type": "deepsky",
+   "subtype": "galaxy",
+   "raH": 13.2642,
+   "dec": 42.03,
+   "sizeDeg": 0.2,
+   "minBortle": 2,
+   "months": [
+    3,
+    9
+   ],
+   "focalFF": [
+    400,
+    1000
+   ],
+   "tracker": true,
+   "fg": "猎犬座方向",
+   "tips": "旋臂细节靠叠加，单张不宜过曝"
+  },
+  {
+   "id": "m64",
+   "name": "M64 黑眼星系",
+   "en": "Black Eye Galaxy",
+   "type": "deepsky",
+   "subtype": "galaxy",
+   "raH": 12.945,
+   "dec": 21.68,
+   "sizeDeg": 0.15,
+   "minBortle": 3,
+   "months": [
+    3,
+    8
+   ],
+   "focalFF": [
+    400,
+    1000
+   ],
+   "tracker": true,
+   "fg": "后发座方向",
+   "tips": "暗尘带是主体，Bortle 4 以上会糊"
+  },
+  {
+   "id": "ngc253",
+   "name": "NGC253 银币星系",
+   "en": "Sculptor Galaxy",
+   "type": "deepsky",
+   "subtype": "galaxy",
+   "raH": 0.7925,
+   "dec": -25.29,
+   "sizeDeg": 0.5,
+   "minBortle": 2,
+   "months": [
+    8,
+    12
+   ],
+   "focalFF": [
+    300,
+    800
+   ],
+   "tracker": true,
+   "fg": "玉夫座方向（南向低空）",
+   "tips": "南向低空，务必找无遮挡机位"
+  },
+  {
+   "id": "ngc891",
+   "name": "NGC891 侧向星系",
+   "en": "NGC 891",
+   "type": "deepsky",
+   "subtype": "galaxy",
+   "raH": 2.375,
+   "dec": 42.35,
+   "sizeDeg": 0.4,
+   "minBortle": 2,
+   "months": [
+    9,
+    2
+   ],
+   "focalFF": [
+    300,
+    800
+   ],
+   "tracker": true,
+   "fg": "仙女座方向",
+   "tips": "尘埃带清晰，适合练长焦叠加"
+  },
+  {
+   "id": "m8",
+   "name": "M8 礁湖星云",
+   "en": "Lagoon Nebula",
+   "type": "deepsky",
+   "subtype": "nebula",
+   "raH": 18.06,
+   "dec": -24.38,
+   "sizeDeg": 1.5,
+   "minBortle": 3,
+   "months": [
+    6,
+    9
+   ],
+   "focalFF": [
+    135,
+    300
+   ],
+   "tracker": false,
+   "fg": "人马座方向（南向低空）",
+   "tips": "夏季银河核心区，广角 + 短曝也出彩"
+  },
+  {
+   "id": "m16",
+   "name": "M16 老鹰星云",
+   "en": "Eagle Nebula",
+   "type": "deepsky",
+   "subtype": "nebula",
+   "raH": 18.313,
+   "dec": -13.78,
+   "sizeDeg": 0.5,
+   "minBortle": 3,
+   "months": [
+    6,
+    9
+   ],
+   "focalFF": [
+    300,
+    800
+   ],
+   "tracker": true,
+   "fg": "巨蛇座方向",
+   "tips": "创生之柱需要长焦 + Hα"
+  },
+  {
+   "id": "m17",
+   "name": "M17 天鹅星云",
+   "en": "Omega Nebula",
+   "type": "deepsky",
+   "subtype": "nebula",
+   "raH": 18.346,
+   "dec": -16.17,
+   "sizeDeg": 0.6,
+   "minBortle": 3,
+   "months": [
+    6,
+    9
+   ],
+   "focalFF": [
+    300,
+    800
+   ],
+   "tracker": true,
+   "fg": "人马座方向",
+   "tips": "表面亮度高，城市边缘也能拍"
+  },
+  {
+   "id": "m20",
+   "name": "M20 三叶星云",
+   "en": "Trifid Nebula",
+   "type": "deepsky",
+   "subtype": "nebula",
+   "raH": 18.045,
+   "dec": -23.03,
+   "sizeDeg": 0.5,
+   "minBortle": 3,
+   "months": [
+    6,
+    9
+   ],
+   "focalFF": [
+    300,
+    800
+   ],
+   "tracker": true,
+   "fg": "人马座方向",
+   "tips": "与 M8 同场，一晚上两个目标"
+  },
+  {
+   "id": "ic1805",
+   "name": "IC1805 心脏星云",
+   "en": "Heart Nebula",
+   "type": "deepsky",
+   "subtype": "nebula",
+   "raH": 2.545,
+   "dec": 61.45,
+   "sizeDeg": 2.5,
+   "minBortle": 2,
+   "months": [
+    8,
+    1
+   ],
+   "focalFF": [
+    85,
+    200
+   ],
+   "tracker": true,
+   "fg": "仙后座方向",
+   "tips": "广域 + Hα 最省事，冬季整夜可见"
+  },
+  {
+   "id": "ic1848",
+   "name": "IC1848 灵魂星云",
+   "en": "Soul Nebula",
+   "type": "deepsky",
+   "subtype": "nebula",
+   "raH": 2.87,
+   "dec": 60.43,
+   "sizeDeg": 2,
+   "minBortle": 2,
+   "months": [
+    8,
+    1
+   ],
+   "focalFF": [
+    85,
+    200
+   ],
+   "tracker": true,
+   "fg": "仙后座方向",
+   "tips": "与心脏星云同框，可拼成双联"
+  },
+  {
+   "id": "ngc7023",
+   "name": "NGC7023 鸢尾花星云",
+   "en": "Iris Nebula",
+   "type": "deepsky",
+   "subtype": "nebula",
+   "raH": 21.02,
+   "dec": 68.16,
+   "sizeDeg": 0.2,
+   "minBortle": 2,
+   "months": [
+    6,
+    11
+   ],
+   "focalFF": [
+    400,
+    1000
+   ],
+   "tracker": true,
+   "fg": "仙王座方向",
+   "tips": "反射星云，蓝调最难，必须暗夜"
+  },
+  {
+   "id": "ngc7635",
+   "name": "NGC7635 气泡星云",
+   "en": "Bubble Nebula",
+   "type": "deepsky",
+   "subtype": "nebula",
+   "raH": 23.34,
+   "dec": 61.2,
+   "sizeDeg": 0.1,
+   "minBortle": 2,
+   "months": [
+    7,
+    11
+   ],
+   "focalFF": [
+    600,
+    1500
+   ],
+   "tracker": true,
+   "fg": "仙后座方向",
+   "tips": "小目标，需要长焦 + OIII"
+  },
+  {
+   "id": "ngc281",
+   "name": "NGC281 吃豆人星云",
+   "en": "Pacman Nebula",
+   "type": "deepsky",
+   "subtype": "nebula",
+   "raH": 0.878,
+   "dec": 56.62,
+   "sizeDeg": 0.6,
+   "minBortle": 2,
+   "months": [
+    8,
+    12
+   ],
+   "focalFF": [
+    300,
+    800
+   ],
+   "tracker": true,
+   "fg": "仙后座方向",
+   "tips": "形态讨巧，Hα 下结构最清楚"
+  },
+  {
+   "id": "m35",
+   "name": "M35 双子座疏散星团",
+   "en": "Messier 35",
+   "type": "deepsky",
+   "subtype": "cluster",
+   "raH": 6.15,
+   "dec": 24.33,
+   "sizeDeg": 0.5,
+   "minBortle": 4,
+   "months": [
+    11,
+    3
+   ],
+   "focalFF": [
+    300,
+    600
+   ],
+   "tracker": false,
+   "fg": "双子座方向",
+   "tips": "旁边还有 NGC2158，长焦可同框"
+  },
+  {
+   "id": "m37",
+   "name": "M37 御夫座疏散星团",
+   "en": "Messier 37",
+   "type": "deepsky",
+   "subtype": "cluster",
+   "raH": 5.88,
+   "dec": 32.55,
+   "sizeDeg": 0.4,
+   "minBortle": 4,
+   "months": [
+    10,
+    3
+   ],
+   "focalFF": [
+    300,
+    600
+   ],
+   "tracker": false,
+   "fg": "御夫座方向",
+   "tips": "与 M36/M38 同一片天区，可连拍"
+  },
+  {
+   "id": "m41",
+   "name": "M41 大犬座星团",
+   "en": "Messier 41",
+   "type": "deepsky",
+   "subtype": "cluster",
+   "raH": 6.77,
+   "dec": -20.73,
+   "sizeDeg": 0.6,
+   "minBortle": 4,
+   "months": [
+    12,
+    3
+   ],
+   "focalFF": [
+    200,
+    400
+   ],
+   "tracker": false,
+   "fg": "大犬座方向（南向低空）",
+   "tips": "天狼星旁，广角短曝即可"
+  },
+  {
+   "id": "ngc7789",
+   "name": "NGC7789 卡洛琳玫瑰",
+   "en": "Caroline's Rose",
+   "type": "deepsky",
+   "subtype": "cluster",
+   "raH": 23.95,
+   "dec": 56.72,
+   "sizeDeg": 0.3,
+   "minBortle": 3,
+   "months": [
+    8,
+    12
+   ],
+   "focalFF": [
+    400,
+    800
+   ],
+   "tracker": true,
+   "fg": "仙后座方向",
+   "tips": "密集星团，长焦 + 堆叠出层次"
+  },
+  {
+   "id": "ngc457",
+   "name": "NGC457 猫头鹰星团",
+   "en": "Owl Cluster",
+   "type": "deepsky",
+   "subtype": "cluster",
+   "raH": 1.32,
+   "dec": 58.29,
+   "sizeDeg": 0.2,
+   "minBortle": 3,
+   "months": [
+    8,
+    12
+   ],
+   "focalFF": [
+    400,
+    800
+   ],
+   "tracker": true,
+   "fg": "仙后座方向",
+   "tips": "形态像猫头鹰，适合拍「有趣」题材"
+  },
+  {
+   "id": "melotte111",
+   "name": "Melotte111 后发星团",
+   "en": "Coma Star Cluster",
+   "type": "deepsky",
+   "subtype": "cluster",
+   "raH": 12.37,
+   "dec": 26,
+   "sizeDeg": 4,
+   "minBortle": 4,
+   "months": [
+    2,
+    7
+   ],
+   "focalFF": [
+    85,
+    200
+   ],
+   "tracker": false,
+   "fg": "后发座方向",
+   "tips": "角直径 4°+，必须广角，肉眼可见"
+  },
+  {
+   "id": "ngc7293",
+   "name": "NGC7293 螺旋星云",
+   "en": "Helix Nebula",
+   "type": "deepsky",
+   "subtype": "planetary",
+   "raH": 22.49,
+   "dec": -20.83,
+   "sizeDeg": 0.25,
+   "minBortle": 3,
+   "months": [
+    7,
+    11
+   ],
+   "focalFF": [
+    400,
+    1000
+   ],
+   "tracker": true,
+   "fg": "宝瓶座方向（南向低空）",
+   "tips": "最大的行星状星云之一，OIII 明显"
+  },
+  {
+   "id": "ngc6543",
+   "name": "NGC6543 猫眼星云",
+   "en": "Cat's Eye Nebula",
+   "type": "deepsky",
+   "subtype": "planetary",
+   "raH": 17.976,
+   "dec": 66.63,
+   "sizeDeg": 0.02,
+   "minBortle": 3,
+   "months": [
+    6,
+    11
+   ],
+   "focalFF": [
+    800,
+    2000
+   ],
+   "tracker": true,
+   "fg": "天龙座方向",
+   "tips": "小且亮，高倍下才见内核结构"
+  },
+  {
+   "id": "ngc7009",
+   "name": "NGC7009 土星状星云",
+   "en": "Saturn Nebula",
+   "type": "deepsky",
+   "subtype": "planetary",
+   "raH": 21.07,
+   "dec": -11.36,
+   "sizeDeg": 0.1,
+   "minBortle": 3,
+   "months": [
+    8,
+    11
+   ],
+   "focalFF": [
+    800,
+    2000
+   ],
+   "tracker": true,
+   "fg": "宝瓶座方向",
+   "tips": "形状像土星，长焦 + 高倍"
+  }
+ ]
+}

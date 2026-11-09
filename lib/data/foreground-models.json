@@ -1,0 +1,13 @@
+{
+  "schema": "dsh-astro-plan/foreground-models@1",
+  "note": "站点库只记录地景名与方位窗口，没有 DEM。这里把地景名映射到「剪影高度 + 起伏幅度」，用于画面模拟里的地形示意（非实测地形）。规则按顺序匹配，先命中者生效；高度单位为度。匹配词尽量具体，避免「高山草甸」被「山」误判成山脊。",
+  "rules": [
+    { "match": ["峰", "脊", "岭", "垭口", "雪山", "冰川", "山巅", "崖"], "kind": "ridge", "heightDeg": 9, "jag": 0.28 },
+    { "match": ["林", "松", "树"], "kind": "forest", "heightDeg": 7, "jag": 0.22 },
+    { "match": ["湖", "水面", "倒影", "湾", "海岸", "海滩"], "kind": "water", "heightDeg": 1.8, "jag": 0.04 },
+    { "match": ["草甸", "草原", "梯田", "花海", "草坡"], "kind": "meadow", "heightDeg": 3.5, "jag": 0.12 },
+    { "match": ["塔", "寺", "观景台", "风车", "阵列", "射电", "碑", "栈道"], "kind": "structure", "heightDeg": 4.5, "jag": 0.3 },
+    { "match": ["沙", "雅丹", "戈壁", "盐", "丹霞", "石林"], "kind": "desert", "heightDeg": 2, "jag": 0.15 }
+  ],
+  "default": { "kind": "ridge", "heightDeg": 5, "jag": 0.18 }
+}

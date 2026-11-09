@@ -1,0 +1,57 @@
+{
+  "name": "dsh-astro-plan",
+  "version": "0.29.0",
+  "description": "星野计划（by Sirius YANG）：按 18 类天象与深空目标、全国 173 站、最长一年检索，结合光污染、方位、月相、星历事件与 7 天天气，给出推荐排序、地景、焦段与曝光；每条结果附 Stellarium 风格 3D 天球画面模拟（真实银河等值线、真实月相、实测天际线）。",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "test": "node --test --test-isolation=none 'tests/*.test.js'",
+    "validate": "node scripts/validate-sites.mjs"
+  },
+  "license": "MIT",
+  "dsh": {
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-runtime"
+      ],
+      "platform": "web"
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "author": "Sirius YANG",
+  "keywords": [
+    "dsh-plugin",
+    "dsh-bundle",
+    "astrophotography",
+    "astronomy",
+    "milky-way",
+    "planning"
+  ],
+  "engines": {
+    "node": ">=20",
+    "dsh": ">=0.2.1-rc.2 <0.3.0-0"
+  },
+  "files": [
+    "lib/**/*.js",
+    "lib/data/*.json",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE",
+    "docs/icon.svg"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beyangyi/dsh-repository.git"
+  },
+  "homepage": "https://github.com/beyangyi/dsh-repository#readme",
+  "bugs": {
+    "url": "https://github.com/beyangyi/dsh-repository/issues"
+  }
+}

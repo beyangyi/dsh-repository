@@ -1,0 +1,22 @@
+{
+  "meteors": [
+    {"id": "draconids", "name": "天龙座流星雨", "peakUtc": "2026-10-08T19:00:00Z", "raH": 17.47, "dec": 54.0, "zhr": 10, "speed": 20, "active": "10-06 ~ 10-10", "note": "偶发爆发，母体 21P"},
+    {"id": "orionids", "name": "猎户座流星雨", "peakUtc": "2026-10-21T18:00:00Z", "raH": 6.35, "dec": 16.0, "zhr": 20, "speed": 66, "active": "10-02 ~ 11-07", "note": "哈雷彗星母体，快速流星"},
+    {"id": "taurusS", "name": "金牛座南流星雨", "peakUtc": "2026-11-05T19:00:00Z", "raH": 3.5, "dec": 13.0, "zhr": 5, "speed": 27, "active": "09-10 ~ 12-10", "note": "火流星比例高，活动期长"},
+    {"id": "taurusN", "name": "金牛座北流星雨", "peakUtc": "2026-11-12T18:00:00Z", "raH": 3.83, "dec": 22.0, "zhr": 5, "speed": 29, "active": "10-20 ~ 12-10", "note": "2026-11-13 02:00 CST 极大，无月"},
+    {"id": "leonids", "name": "狮子座流星雨", "peakUtc": "2026-11-18T00:00:00Z", "raH": 10.17, "dec": 22.0, "zhr": 15, "speed": 71, "active": "11-06 ~ 11-30", "note": "2026-11-18 08:00 CST 极大，盈凸月午夜后落下"},
+    {"id": "geminids", "name": "双子座流星雨", "peakUtc": "2026-12-14T06:00:00Z", "raH": 7.47, "dec": 32.0, "zhr": 120, "speed": 35, "active": "12-04 ~ 12-20", "note": "全年最强，慢速明亮"},
+    {"id": "ursids", "name": "小熊座流星雨", "peakUtc": "2026-12-22T09:00:00Z", "raH": 14.47, "dec": 75.0, "zhr": 10, "speed": 33, "active": "12-17 ~ 12-26", "note": "北天小流量"},
+    {"id": "quadrantids", "name": "象限仪流星雨", "peakUtc": "2027-01-03T16:00:00Z", "raH": 15.33, "dec": 49.0, "zhr": 110, "speed": 41, "active": "12-28 ~ 01-12", "note": "极大期仅数小时"},
+    {"id": "lyrids", "name": "天琴座流星雨", "peakUtc": "2027-04-22T13:00:00Z", "raH": 18.17, "dec": 34.0, "zhr": 18, "speed": 49, "active": "04-16 ~ 04-25", "note": "撒切尔彗星母体"},
+    {"id": "etaAquariids", "name": "宝瓶座η流星雨", "peakUtc": "2027-05-06T14:00:00Z", "raH": 22.5, "dec": -1.0, "zhr": 50, "speed": 66, "active": "04-19 ~ 05-28", "note": "哈雷彗星母体，黎明前"},
+    {"id": "perseids", "name": "英仙座流星雨", "peakUtc": "2027-08-12T20:00:00Z", "raH": 3.13, "dec": 58.0, "zhr": 100, "speed": 59, "active": "07-17 ~ 08-24", "note": "夏季经典"}
+  ],
+  "seasons": [
+    {"id": "galactic-eye", "name": "银河之眼", "months": [[3, 6]], "note": "需银河拱桥 + 残月升起于拱桥正中，仅 3–6 月"},
+    {"id": "milkyway-arch", "name": "银河拱桥", "months": [[3, 6]], "note": "4–5 月黄金期，横跨天际"},
+    {"id": "zodiacal-spring", "name": "春季黄道光", "months": [[2, 4]], "note": "黄昏后西方低空，晚霞散尽 1–2 小时内，需无月极暗"},
+    {"id": "zodiacal-autumn", "name": "秋季黄道光", "months": [[9, 11]], "note": "黎明前东方低空，天文晨光开始前 1–2 小时，需无月极暗"},
+    {"id": "aurora", "name": "极光季", "months": [[9, 4]], "note": "北纬 42° 以上站点，需 Kp ≥ 7 的地磁暴；本工具不预报地磁活动"}
+  ]
+}

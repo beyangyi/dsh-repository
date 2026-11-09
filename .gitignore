@@ -1,0 +1,16 @@
+# 发布用的 npm 令牌（绝不提交、不会进 npm 包）
+.npmrc
+
+# npm 缓存（沙箱里必须写在工程内）
+.npm-cache/
+
+# 发布索引用的 GitHub 令牌（绝不提交）
+.github-token
+
+# 依赖与日志
+node_modules/
+*.log
+
+# 系统垃圾
+.DS_Store
+Thumbs.db

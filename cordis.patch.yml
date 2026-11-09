@@ -1,0 +1,10 @@
+# dsh-astro-plan bundle patch: inserts the host row into the profile's plugin
+# roster. The browser half rides the package's `dsh.client` manifest (the client
+# registry serves lib/client.js), and this row materializes the astro-planning
+# host plugin on boot.
+#
+# 包名 / 行 id / client id 三者保持一致（都是 dsh-astro-plan），这是 DSH 客户端
+# 模块系统能稳定识别的形态；改成 scoped 名会让同一条 bundle 被注册两次。
+- insert:
+    - id: dsh-astro-plan
+      name: 'dsh-astro-plan'
