@@ -40,7 +40,7 @@
   },
   "plugins": [
     {
-      "name": "@siriusyang/dsh-astro-plan",
+      "name": "dsh-astro-plan",
       "title": {
         "zh": "星野计划 · Astro Plan",
         "en": "Astro Plan"
@@ -73,8 +73,8 @@
       },
       "versions": [
         {
-          "version": "0.27.1",
-          "publishTimestamp": 1794227732,
+          "version": "0.28.0",
+          "publishTimestamp": 1794233265,
           "source": {
             "type": "npm"
           },
