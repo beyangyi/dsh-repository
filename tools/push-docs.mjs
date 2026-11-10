@@ -37,8 +37,8 @@ if (!token) {
   process.exit(2)
 }
 
-const owner = config.owner
-const repo = config.repository.replace(/^.*github\.com\//u, '').replace(/\.git$/u, '')
+const slug = config.repository.replace(/^.*github\.com\//u, '').replace(/\.git$/u, '')
+const [owner, repo] = slug.split('/')
 const branch = 'main'
 
 /** 待推送的文件：仓库相对路径 → 本地绝对路径 */

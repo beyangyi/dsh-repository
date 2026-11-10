@@ -1,5 +1,10 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
+import { readFileSync } from 'node:fs'
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 
 import { RENDER_SRC } from '../lib/skyview.js'
 
@@ -93,6 +98,14 @@ test('客户端：3D 天球渲染器与右列布局', () => {
   const want = RENDER_SRC
     .split('\n').map((line) => line.trim()).filter(Boolean).join('\n')
   assert.equal(got, want, '客户端渲染器应与 lib/skyview.js 的 RENDER_SRC 一致（改完跑 tools/sync-sky-renderer.mjs）')
+})
+
+test('客户端：窄屏时画面模拟置顶，其余便签移到下方', () => {
+  const src = readFileSync(join(ROOT, 'lib', 'client.js'), 'utf8')
+  assert.match(src, /@media \(max-width:1100px\)\{\.ap-notegrid\{grid-template-columns:1fr\}/u, 'Tab 应有同样的 1100px 单列规则')
+  assert.match(src, /\.ap-noteright\{order:-1;position:static;max-width:880px\}/u, 'Tab 的画面模拟应置顶')
+  assert.match(src, /\.ap-nsec\.wide\{grid-column:1\/-1\}/u, 'Tab 的宽区块应占满整行')
+  assert.ok(!src.includes('@media (max-width:900px){.ap-notegrid'), '旧的 900px 规则应已移除')
 })
 
 test('客户端：便签展开/收起是过渡动画（不硬切）', () => {

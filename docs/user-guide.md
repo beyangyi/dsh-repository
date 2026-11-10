@@ -46,7 +46,7 @@
 ```bash
 # 1) 插件市场：插件 → 发现 → 添加索引 → 粘贴索引地址 → 安装「星野计划」
 # 2) npm
-dsh plugin --profile desktop add dsh-astro-plan@0.29.0
+dsh plugin --profile desktop add dsh-astro-plan@0.1.0
 # 3) 本地目录（开发用）
 dsh plugin --profile desktop add "<本目录绝对路径>"
 ```
@@ -138,7 +138,7 @@ curl http://127.0.0.1:<端口>/astro-plan/api/meta
 
 ![便签详情](images/03-note.png)
 
-点任意结果行，下方展开一张便签。左侧七块、右侧整列只放画面模拟：
+点任意结果行，下方展开一张便签。宽屏时左侧七块、右侧整列只放画面模拟；**屏幕较窄（<1100px）时画面模拟排在最上面，七个便签移到它下方**：
 
 | 区块 | 内容 |
 |---|---|
@@ -356,4 +356,4 @@ curl "http://127.0.0.1:<端口>/astro-plan/api/search?...&withSim=0"
 
 ---
 
-**版本**：0.29.0 · **许可**：MIT · **作者**：Sirius YANG
+**版本**：0.1.0 · **许可**：MIT · **作者**：Sirius YANG

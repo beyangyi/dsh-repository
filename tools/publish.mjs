@@ -172,7 +172,8 @@ console.log(`npm 账号：${who.out.split('\n').pop().trim()}`)
 
 // 无 scope 的包不能带 --access public，scoped 包必须带
 const accessArgs = pkg.name.startsWith('@') ? ['--access', 'public'] : []
-const publish = npm(['publish', ...accessArgs, '--registry', REGISTRY], { timeout: 600000 })
+// 显式指定 latest：版本号回退（如重置到 0.1.0）时 npm 不允许隐式打 latest 标签
+const publish = npm(['publish', ...accessArgs, '--tag', 'latest', '--registry', REGISTRY], { timeout: 600000 })
 console.log(publish.out)
 if (publish.code !== 0) {
   console.error('✗ 发布失败（上面的输出里有原因）')

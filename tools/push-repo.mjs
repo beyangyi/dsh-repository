@@ -46,8 +46,8 @@ for (const dir of DIRS) {
 
 const config = JSON.parse(readFileSync(join(ROOT, 'market.config.json'), 'utf8'))
 const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'))
-const owner = config.owner
-const repo = config.repository.replace(/^.*github\.com\//u, '').replace(/\.git$/u, '')
+const slug = config.repository.replace(/^.*github\.com\//u, '').replace(/\.git$/u, '')
+const [owner, repo] = slug.split('/')
 const branch = 'main'
 
 function token() {

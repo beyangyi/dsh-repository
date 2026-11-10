@@ -8,6 +8,11 @@
 
 import assert from 'node:assert/strict'
 import test from 'node:test'
+import { readFileSync } from 'node:fs'
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 
 import { meta, search } from '../lib/planner.js'
 import { page } from '../lib/webui.js'
@@ -179,6 +184,15 @@ test('目标类型：两级菜单（先选分组，再选具体类型）', async
   assert.equal(menu.style.display, 'none', '选完自动收起')
 
   delete globalThis.__bootPromise
+})
+
+test('窄屏布局：画面模拟置顶占一行，其余便签移到它下方', () => {
+  const css = readFileSync(join(ROOT, 'lib', 'webui.js'), 'utf8')
+  assert.match(css, /@media \(max-width:1100px\)/u, '应有 1100px 断点')
+  assert.match(css, /\.note \.notegrid\{grid-template-columns:1fr\}/u, '窄屏应为单列')
+  assert.match(css, /\.note \.noteright\{order:-1;position:static;max-width:880px\}/u, '画面模拟应置顶并取消 sticky')
+  assert.match(css, /\.note \.sec\.wide\{grid-column:1\/-1\}/u, '推荐度明细应占满整行')
+  assert.ok(!css.includes('@media (max-width:900px){ .note .notegrid'), '旧的 900px 单列规则应已移除')
 })
 
 test('画面模拟：右侧整列，左侧 7 个便签（推荐度占两列），默认暂停在最佳时段开始', async () => {
