@@ -57,23 +57,23 @@ test('市场索引：图标内联为 data URL，解码不超过 32 KiB', () => {
 
 test('账号迁移：仓库地址全部指向新账号，且没有旧账号残留', () => {
   assert.equal(config.owner, 'SiriusYANG91', 'market.config.json 的 owner 应已改名')
-  assert.equal(config.repository, 'https://github.com/SiriusYANG91/dsh-repository')
-  assert.ok(pkg.repository.url.includes('SiriusYANG91/dsh-repository'), 'package.json repository 应指向新仓库')
-  assert.equal(pkg.homepage, 'https://github.com/SiriusYANG91/dsh-repository#readme')
+  assert.equal(config.repository, 'https://github.com/SiriusYANG91/dsh-astro-plan')
+  assert.ok(pkg.repository.url.includes('SiriusYANG91/dsh-astro-plan'), 'package.json repository 应指向新仓库')
+  assert.equal(pkg.homepage, 'https://github.com/SiriusYANG91/dsh-astro-plan#readme')
   for (const file of ['README.md', 'docs/user-guide.md', 'screenshots.json', 'awesome-entry.yml']) {
     const text = readFileSync(join(ROOT, file), 'utf8')
     assert.ok(!/beyangyi|sirius-yang/u.test(text), `${file} 不应再出现旧账号`)
   }
 })
 
-test('版本：package.json 与 README / 指南 / 索引一致为 0.1.0', () => {
-  assert.equal(pkg.version, '0.1.0')
+test('版本：package.json 与 README / 指南 / 索引一致为 0.1.1', () => {
+  assert.equal(pkg.version, '0.1.1')
   const readme = readFileSync(join(ROOT, 'README.md'), 'utf8')
-  assert.ok(readme.includes('dsh-astro-plan@0.1.0'), 'README 安装命令应为 0.1.0')
+  assert.ok(readme.includes('dsh-astro-plan@0.1.1'), 'README 安装命令应为 0.1.1')
   assert.ok(!readme.includes('0.29.0'), 'README 不应残留旧版本号')
   const guide = readFileSync(join(ROOT, 'docs', 'user-guide.md'), 'utf8')
-  assert.ok(guide.includes('0.1.0'), '指南应写 0.1.0')
-  assert.equal(index.plugins[0].versions[0].version, '0.1.0', '索引最新版本应为 0.1.0')
+  assert.ok(guide.includes('0.1.1'), '指南应写 0.1.1')
+  assert.equal(index.plugins[0].versions[0].version, '0.1.1', '索引最新版本应为 0.1.1')
 })
 
 test('可发布：非 private、公开访问、包里带齐 lib 与 patch', () => {
@@ -127,9 +127,9 @@ test('生成器幂等：固定时间戳时两次输出完全一致', () => {
 test('仓库占位符：索引省略 homepage/repository，体检会提示缺项', () => {
   assert.equal(isPlaceholder(''), true)
   assert.equal(isPlaceholder('https://github.com/REPLACE-ME/dsh-astro-plan'), true)
-  assert.equal(isPlaceholder('https://github.com/SiriusYANG91/dsh-repository'), false)
+  assert.equal(isPlaceholder('https://github.com/SiriusYANG91/dsh-astro-plan'), false)
   assert.equal(repoUrls({ owner: '', repository: '' }), null)
-  const urls = repoUrls({ owner: 'SiriusYANG91', repository: 'https://github.com/SiriusYANG91/dsh-repository' })
+  const urls = repoUrls({ owner: 'SiriusYANG91', repository: 'https://github.com/SiriusYANG91/dsh-astro-plan' })
   assert.equal(urls.indexUrl, INDEX_URL, 'raw 索引地址要按 owner/repo 拼出来')
   const draft = buildMarketIndex({ pkg, config: { ...config, owner: '', repository: '' }, iconSvg, previous: null, now: 1794000000000 })
   assert.equal(draft.missing.length, 1, '占位符要报缺项')

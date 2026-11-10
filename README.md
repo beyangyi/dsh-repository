@@ -2,11 +2,11 @@
 
 [![npm](https://img.shields.io/npm/v/dsh-astro-plan?label=npm)](https://www.npmjs.com/package/dsh-astro-plan)
 [![license](https://img.shields.io/badge/license-MIT-3da639)](LICENSE)
-[![guide](https://img.shields.io/badge/用户指南-docs-d8b46a)](https://github.com/SiriusYANG91/dsh-repository/blob/main/docs/user-guide.md)
+[![guide](https://img.shields.io/badge/用户指南-docs-d8b46a)](https://github.com/SiriusYANG91/dsh-astro-plan/blob/main/docs/user-guide.md)
 
 星野计划（by Sirius YANG）：按 18 类天象与深空目标、全国 173 站、最长一年检索，结合光污染、方位、月相、星历事件与 7 天天气，给出推荐排序、地景、焦段与曝光；每条结果附 Stellarium 风格 3D 天球画面模拟（真实银河等值线、真实月相、实测天际线）。
 
-![查询区与页头](https://raw.githubusercontent.com/SiriusYANG91/dsh-repository/main/docs/images/01-overview.png)
+![查询区与页头](https://raw.githubusercontent.com/SiriusYANG91/dsh-astro-plan/main/docs/images/01-overview.png)
 
 ## 功能速览
 
@@ -27,13 +27,13 @@
 **1）插件市场**：侧边栏「插件」→「发现」→ 添加索引
 
 ```
-https://raw.githubusercontent.com/SiriusYANG91/dsh-repository/main/docs/market-index.json
+https://raw.githubusercontent.com/SiriusYANG91/dsh-astro-plan/main/docs/market-index.json
 ```
 
 **2）npm**
 
 ```bash
-dsh plugin --profile desktop add dsh-astro-plan@0.1.0
+dsh plugin --profile desktop add dsh-astro-plan@0.1.1
 ```
 
 **3）本地目录（开发）**
@@ -110,9 +110,9 @@ dsh plugin --profile desktop add "<本目录绝对路径>"
 
 ## 截图
 
-![便签详情](https://raw.githubusercontent.com/SiriusYANG91/dsh-repository/main/docs/images/03-note.png)
+![便签详情](https://raw.githubusercontent.com/SiriusYANG91/dsh-astro-plan/main/docs/images/03-note.png)
 
-![合月与真实月相](https://raw.githubusercontent.com/SiriusYANG91/dsh-repository/main/docs/images/06-sim-moon.png)
+![合月与真实月相](https://raw.githubusercontent.com/SiriusYANG91/dsh-astro-plan/main/docs/images/06-sim-moon.png)
 
 完整图文说明（14 章、9 张截图）见 **[用户指南](docs/user-guide.md)**。
 
