@@ -49,6 +49,10 @@
 | Settings → **Actions → General** | Workflow permissions 是否只读；是否允许 Actions 建 PR | Read only + 不允许 |
 | Settings → **Code security** | Secret scanning 与 Push protection | 都开启 |
 
+我的只读令牌读不到 deploy keys / 部分设置，所以把**手动确认过的结论**登记在 [`docs/repo-lock.json`](repo-lock.json)，审计脚本会读取它并把对应项标成 ✓（并注明确认日期）。改完记得提交。
+
+当前已确认：**部署密钥为空**（2026-11-11）。其余三项（Applications / Actions 权限 / Secret scanning）仍待确认，已在文件里标为 `unknown`。
+
 一键复查（只读，不会改任何东西）：
 
 ```bash

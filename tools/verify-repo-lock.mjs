@@ -16,6 +16,10 @@ const ROOT = join(HERE, '..')
 const jsonMode = process.argv.includes('--json')
 
 const config = JSON.parse(readFileSync(join(ROOT, 'market.config.json'), 'utf8'))
+/** 需要管理权限、API 读不到的项，登记在 docs/repo-lock.json 里。 */
+const lockFile = join(ROOT, 'docs', 'repo-lock.json')
+const manual = existsSync(lockFile) ? (JSON.parse(readFileSync(lockFile, 'utf8')).manualChecks ?? {}) : {}
+const manualDone = (key) => Boolean(manual[key] && manual[key].confirmedAt && manual[key].result !== 'unknown')
 const owner = config.owner
 const repo = config.repository.replace(/^.*github\.com\//u, '').replace(/\.git$/u, '').split('/')[1]
 
@@ -101,9 +105,17 @@ if (keys.status === 200 && Array.isArray(keys.json)) {
   record('部署密钥', keys.json.length === 0 ? 'ok' : writable.length ? 'fail' : 'warn',
     keys.json.length === 0 ? '没有任何部署密钥' : `共 ${keys.json.length} 个，可写 ${writable.length} 个`,
     'Settings → Deploy keys：删除，或改为只读')
+} else if (manualDone('deployKeys')) {
+  record('部署密钥', manual.deployKeys.result === 'none' ? 'ok' : 'fail',
+    `手动确认（${manual.deployKeys.confirmedAt}）：${manual.deployKeys.detail ?? manual.deployKeys.result}`,
+    'Settings → Deploy keys 删除可写密钥')
 } else {
-  record('部署密钥', 'warn', `令牌无管理权限，读不到（HTTP ${keys.status}）`, 'Settings → Deploy keys 手动确认没有可写密钥')
+  record('部署密钥', 'warn', `令牌无管理权限，读不到（HTTP ${keys.status}）`, 'Settings → Deploy keys 手动确认后写进 docs/repo-lock.json')
 }
+
+if (manualDone('actionsPermissions')) record('Actions 权限（手动）', 'ok', manual.actionsPermissions.detail ?? '已确认', '—')
+if (manualDone('secretScanningAndPushProtection')) record('Secret scanning（手动）', 'ok', manual.secretScanningAndPushProtection.detail ?? '已确认', '—')
+if (manualDone('applications')) record('第三方应用（手动）', 'ok', manual.applications.detail ?? '已确认', '—')
 
 const prs = await call(`/pulls?state=open&per_page=5`)
 record('开放 PR', 'info', Array.isArray(prs.json) ? `${prs.json.length} 个` : '读不到', '—')

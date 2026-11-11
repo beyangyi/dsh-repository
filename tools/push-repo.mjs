@@ -19,6 +19,7 @@ const checkOnly = process.argv.includes('--check')
 /** 只有显式带 --allow-push 才写远端；助手默认不带，避免误推。 */
 const allowPush = process.argv.includes('--allow-push')
 /** --exclude=<路径前缀> 可重复：本次不推送这些路径（如 --exclude=docs/wechat）。 */
+/** --exclude=<路径前缀> 可重复：本次不推送这些路径。--include 可把同一路径再放回来。 */
 const excludes = process.argv
   .filter((arg) => arg.startsWith('--exclude='))
   .map((arg) => arg.slice('--exclude='.length).replace(/\\/gu, '/').replace(/\/+$/u, ''))

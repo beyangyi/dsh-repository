@@ -129,6 +129,8 @@ node tools/publish.mjs --check|--publish              # 发布 npm 并刷新市�
 node tools/push-repo.mjs                              # 把代码推到 GitHub（需 --allow-push；默认只读）
 node tools/check-secrets.mjs                          # 令牌/私钥扫描 + gitignore 覆盖检查
 node tools/verify-repo-lock.mjs                       # 仓库写权限审计（只读，确认只有所有者可写）
+node tools/make-wechat.mjs                            # 导出公众号版（docs/wechat/guide.html + 配图 + 发布指引）
+python tools/make-wechat-docx.py                      # 导出公众号版 Word（docs/wechat/guide.docx）
 ```
 
 仓库写权限与令牌轮换见 [docs/maintaining.md](docs/maintaining.md)。

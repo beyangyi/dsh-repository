@@ -91,6 +91,15 @@ test('安全：维护文档写清「谁能做什么」与公开仓库语义', ()
   }
 })
 
+test('安全：手动确认记录存在且审计脚本会读取它', () => {
+  const lock = JSON.parse(read('docs/repo-lock.json'))
+  assert.equal(lock.manualChecks.deployKeys.result, 'none', '部署密钥应已确认为空')
+  assert.ok(lock.manualChecks.deployKeys.confirmedAt, '应记录确认日期')
+  const source = read('tools/verify-repo-lock.mjs')
+  assert.ok(source.includes("repo-lock.json"), '审计脚本应读取手动确认记录')
+  assert.ok(source.includes("manualDone('deployKeys')"), '部署密钥应支持手动确认')
+})
+
 test('安全：秘密扫描在干净仓库上零命中', async () => {
   const { scanSecrets } = await import('../tools/check-secrets.mjs')
   const { scanned, problems } = scanSecrets()

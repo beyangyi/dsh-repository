@@ -1,0 +1,27 @@
+{
+  "note": "仓库写权限的手动确认记录。API 读不到的设置（需要管理权限）在这里登记，tools/verify-repo-lock.mjs 会读取并标注「手动确认」。改完记得提交。",
+  "repo": "SiriusYANG91/dsh-astro-plan",
+  "updatedAt": "2026-11-11",
+  "manualChecks": {
+    "deployKeys": {
+      "confirmedAt": "2026-11-11",
+      "result": "none",
+      "detail": "Settings → Deploy keys 为空"
+    },
+    "applications": {
+      "confirmedAt": null,
+      "result": "unknown",
+      "detail": "账号级 Settings → Applications：待确认没有带 Contents: write 的授权"
+    },
+    "actionsPermissions": {
+      "confirmedAt": null,
+      "result": "unknown",
+      "detail": "Settings → Actions → General：待确认 Workflow permissions 为只读且不允许建 PR"
+    },
+    "secretScanningAndPushProtection": {
+      "confirmedAt": null,
+      "result": "unknown",
+      "detail": "Settings → Code security：待确认 Secret scanning 与 Push protection 已开启"
+    }
+  }
+}
