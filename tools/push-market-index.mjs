@@ -19,6 +19,9 @@ const HERE = dirname(fileURLToPath(import.meta.url))
 const ROOT = join(HERE, '..')
 const args = process.argv.slice(2)
 const checkOnly = args.includes('--check')
+/** 只有显式带 --allow-push 才写远端；助手默认不带，避免误推。 */
+const allowPush = args.includes('--allow-push')
+const READ_ONLY_HINT = '令牌是只读的（或没有写入权限）：请改用你自己的凭据推送 —— GitHub 网页 Add file / GitHub Desktop / SSH。'
 
 const readJson = (file) => JSON.parse(readFileSync(join(ROOT, file), 'utf8'))
 const config = readJson('market.config.json')
@@ -94,7 +97,9 @@ console.log(`内容：${sameAsRemote ? '与远端一致，无需推送' : '与�
 
 // 注意：这里不要用 process.exit() 提前退出 —— fetch 的句柄还在关闭中，
 // Node 在 Windows 上会以 libuv 断言崩溃（退出码 0xC0000409）。让脚本自然结束即可。
-if (!checkOnly) {
+if (!checkOnly && !allowPush) {
+  console.log('\n（只读模式：加 --allow-push 才会真正写入远端；助手默认不带这个开关）')
+} else if (!checkOnly) {
   if (!token) {
     console.error('✗ 没有 GitHub 令牌：把令牌写进 .github-token（参考 .github-token.example），或设置 GITHUB_TOKEN')
     process.exitCode = 1

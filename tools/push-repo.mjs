@@ -16,6 +16,15 @@ const HERE = dirname(fileURLToPath(import.meta.url))
 const ROOT = join(HERE, '..')
 const API = 'https://api.github.com'
 const checkOnly = process.argv.includes('--check')
+/** 只有显式带 --allow-push 才写远端；助手默认不带，避免误推。 */
+const allowPush = process.argv.includes('--allow-push')
+/** --exclude=<路径前缀> 可重复：本次不推送这些路径（如 --exclude=docs/wechat）。 */
+const excludes = process.argv
+  .filter((arg) => arg.startsWith('--exclude='))
+  .map((arg) => arg.slice('--exclude='.length).replace(/\\/gu, '/').replace(/\/+$/u, ''))
+  .filter(Boolean)
+const excluded = (rel) => excludes.some((prefix) => rel === prefix || rel.startsWith(prefix + '/') || rel.startsWith(prefix))
+const READ_ONLY_HINT = '令牌是只读的（或没有写入权限）：请改用你自己的凭据推送 —— GitHub 网页 Add file / GitHub Desktop / SSH。'
 
 const SKIP_FILE = /^(?:\.npmrc|\.github-token|.*\.log|tmp-.*|.*\.tmp)$/u
 const SKIP_DIR = /^(?:node_modules|\.npm-cache|\.git|tmp)$/u
@@ -43,6 +52,9 @@ for (const dir of DIRS) {
   const abs = join(ROOT, dir)
   if (existsSync(abs)) walk(abs, dir, files)
 }
+for (const rel of [...files.keys()]) {
+  if (excluded(rel)) files.delete(rel)
+}
 
 const config = JSON.parse(readFileSync(join(ROOT, 'market.config.json'), 'utf8'))
 const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'))
@@ -62,10 +74,15 @@ function token() {
 let total = 0
 for (const [, abs] of files) total += statSync(abs).size
 console.log(`仓库：${owner}/${repo}（${branch}）`)
+if (excludes.length) console.log(`排除：${excludes.join(', ')}`)
 console.log(`待推送：${files.size} 个文件，${(total / 1024).toFixed(0)} KB`)
 for (const [rel, abs] of [...files].slice(0, 8)) console.log(`  ${rel}  ${(statSync(abs).size / 1024).toFixed(0)} KB`)
 if (files.size > 8) console.log(`  … 另有 ${files.size - 8} 个`)
 if (checkOnly) process.exit(0)
+if (!allowPush) {
+  console.log('\n（只读模式：加 --allow-push 才会真正写入远端；助手默认不带这个开关）')
+  process.exit(0)
+}
 
 const auth = token()
 if (!auth) {
@@ -87,7 +104,10 @@ async function api(path, init = {}) {
   const text = await res.text()
   let json = null
   try { json = text ? JSON.parse(text) : null } catch { /* 非 JSON */ }
-  if (!res.ok) throw new Error(`${init.method ?? 'GET'} ${path} → ${res.status} ${(json?.message ?? text).slice(0, 200)}`)
+  if (!res.ok) {
+    const detail = `${init.method ?? 'GET'} ${path} → ${res.status} ${(json?.message ?? text).slice(0, 200)}`
+    throw new Error(res.status === 403 ? `${detail}\n  ${READ_ONLY_HINT}` : detail)
+  }
   return json
 }
 

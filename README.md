@@ -126,7 +126,14 @@ node tools/build-sky.mjs                              # 重建星表/星座/银�
 node tools/sync-sky-renderer.mjs                      # 改完 skyview.js 的 RENDER_SRC 后同步到 Tab
 node tools/make-guide-images.mjs                      # 重出用户指南配图（需无头 Edge）
 node tools/publish.mjs --check|--publish              # 发布 npm 并刷新市场索引
-node tools/push-repo.mjs                              # 把代码推到 GitHub
+node tools/push-repo.mjs                              # 把代码推到 GitHub（需 --allow-push；默认只读）
+node tools/check-secrets.mjs                          # 令牌/私钥扫描 + gitignore 覆盖检查
+node tools/verify-repo-lock.mjs                       # 仓库写权限审计（只读，确认只有所有者可写）
+```
+
+仓库写权限与令牌轮换见 [docs/maintaining.md](docs/maintaining.md)。
+
+```bash
 ```
 
 > 沙箱环境里 `node --test` 会为每个测试文件 spawn 子进程并被拒绝（EPERM），用 `--test-isolation=none` 单进程跑。

@@ -18,6 +18,9 @@ const ROOT = join(HERE, '..')
 const API = 'https://api.github.com'
 const args = process.argv.slice(2)
 const checkOnly = args.includes('--check')
+/** 只有显式带 --allow-push 才写远端；助手默认不带，避免误推。 */
+const allowPush = args.includes('--allow-push')
+const READ_ONLY_HINT = '令牌是只读的（或没有写入权限）：请改用你自己的凭据推送 —— GitHub 网页 Add file / GitHub Desktop / SSH。'
 
 const readJson = (rel) => JSON.parse(readFileSync(join(ROOT, rel), 'utf8'))
 const config = readJson('market.config.json')
@@ -66,7 +69,10 @@ async function api(path, init = {}) {
   const text = await res.text()
   let json = null
   try { json = text ? JSON.parse(text) : null } catch { /* 非 JSON */ }
-  if (!res.ok) throw new Error(`${init.method ?? 'GET'} ${path} → ${res.status} ${(json?.message ?? text).slice(0, 200)}`)
+  if (!res.ok) {
+    const detail = `${init.method ?? 'GET'} ${path} → ${res.status} ${(json?.message ?? text).slice(0, 200)}`
+    throw new Error(res.status === 403 ? `${detail}\n  ${READ_ONLY_HINT}` : detail)
+  }
   return json
 }
 
@@ -80,6 +86,10 @@ for (const [rel, abs] of files) {
 }
 console.log(`合计 ${(total / 1024).toFixed(0)} KB`)
 if (checkOnly) process.exit(0)
+if (!allowPush) {
+  console.log('\n（只读模式：加 --allow-push 才会真正写入远端；助手默认不带这个开关）')
+  process.exit(0)
+}
 
 const ref = await api(`/repos/${owner}/${repo}/git/ref/heads/${branch}`)
 const parentSha = ref.object.sha
