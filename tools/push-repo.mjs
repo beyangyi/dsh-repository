@@ -12,13 +12,15 @@ import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs'
 import { join, dirname, posix, relative } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
+import { deletionEntries, prunePaths } from './prune-diff.mjs'
+
 const HERE = dirname(fileURLToPath(import.meta.url))
 const ROOT = join(HERE, '..')
 const API = 'https://api.github.com'
 const checkOnly = process.argv.includes('--check')
 /** 只有显式带 --allow-push 才写远端；助手默认不带，避免误推。 */
 const allowPush = process.argv.includes('--allow-push')
-/** --exclude=<路径前缀> 可重复：本次不推送这些路径（如 --exclude=docs/wechat）。 */
+/** --exclude=<路径前缀> 可重复：本次不推送这些路径（如 --exclude=tests/fixtures）。 */
 /** --exclude=<路径前缀> 可重复：本次不推送这些路径。--include 可把同一路径再放回来。 */
 const excludes = process.argv
   .filter((arg) => arg.startsWith('--exclude='))
@@ -26,6 +28,9 @@ const excludes = process.argv
   .filter(Boolean)
 /** --message="提交说明" 覆盖默认提交信息。 */
 const messageOverride = (process.argv.find((arg) => arg.startsWith('--message=')) ?? '').slice('--message='.length)
+/** --prune：连带删除「远端有、本地没有」的文件；--prune-dry 只列出不提交。 */
+const prune = process.argv.includes('--prune')
+const pruneDry = process.argv.includes('--prune-dry')
 const excluded = (rel) => excludes.some((prefix) => rel === prefix || rel.startsWith(prefix + '/') || rel.startsWith(prefix))
 const READ_ONLY_HINT = '令牌是只读的（或没有写入权限）：请改用你自己的凭据推送 —— GitHub 网页 Add file / GitHub Desktop / SSH。'
 
@@ -130,6 +135,24 @@ for (let i = 0; i < all.length; i += 6) {
   process.stdout.write(`\r  已上传 ${Math.min(i + 6, all.length)}/${all.length}`)
 }
 process.stdout.write('\n')
+
+let deletedPaths = []
+if (prune || pruneDry) {
+  const remoteTree = await api(`/repos/${owner}/${repo}/git/trees/${parent.tree.sha}?recursive=1`)
+  const remoteBlobs = (remoteTree.tree ?? []).filter((node) => node.type === 'blob').map((node) => node.path)
+  deletedPaths = prunePaths([...files.keys()], remoteBlobs, { exclude: excludes })
+  if (deletedPaths.length) {
+    console.log(`将删除远端 ${deletedPaths.length} 个文件：`)
+    for (const path of deletedPaths) console.log(`  - ${path}`)
+    entries.push(...deletionEntries(deletedPaths))
+  } else {
+    console.log('远端没有需要删除的文件')
+  }
+  if (pruneDry) {
+    console.log('（--prune-dry：只列清单，未提交）')
+    process.exit(0)
+  }
+}
 
 const tree = await api(`/repos/${owner}/${repo}/git/trees`, {
   method: 'POST',

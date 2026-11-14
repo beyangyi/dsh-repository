@@ -180,3 +180,23 @@ test('手势：松手才算选点，拖动只平移', () => {
   const okBlock = src.slice(src.indexOf("ap-map-ok'").slice)
   assert.ok(okBlock.includes("kind: 'site'"), '确定按钮应处理站点结果')
 })
+
+test('自定义点：查询只带坐标，不发 location/province/region', async () => {
+  const { page: buildPage } = await import('../lib/webui.js')
+  const page = buildPage()
+  assert.ok(page.includes('if(!state.custom){'), '页面应在自定义点时跳过三个下拉参数')
+  const client = read('lib/client.js')
+  assert.ok(client.includes('q.site && !customPoint'), 'Tab 应跳过 location')
+  assert.ok(client.includes('q.province && !customPoint'), 'Tab 应跳过 province')
+  assert.ok(client.includes('q.region && !customPoint'), 'Tab 应跳过 region')
+
+  // 后端优先级：即使同时传了冲突的 location/region/province，也只出这一个自定义点
+  const { search } = await import('../lib/planner.js')
+  const result = await search({
+    eventType: 'any', siteLat: 38.123, siteLon: 93.456,
+    dateStart: '2026-11-16', dateEnd: '2026-11-18', pageSize: 50,
+    location: 'haituo', province: '北京', region: '华北',
+  })
+  const sites = [...new Set(result.ranked.map((item) => item.site.id))]
+  assert.deepEqual(sites, ['custom:38.123,93.456'], '结果应只含这个自定义点')
+})
