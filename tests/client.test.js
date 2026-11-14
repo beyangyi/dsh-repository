@@ -108,22 +108,16 @@ test('客户端：窄屏时画面模拟置顶，其余便签移到下方', () =>
   assert.ok(!src.includes('@media (max-width:900px){.ap-notegrid'), '旧的 900px 规则应已移除')
 })
 
-test('客户端：便签展开/收起是过渡动画（不硬切）', () => {
+test('客户端：便签改为浮窗（同层弹窗，点遮罩/Esc 关闭）', () => {
   const src = captured.factory.toString()
-  // CSS：grid-template-rows 0fr ↔ 1fr + 透明度过渡
-  assert.ok(src.includes('grid-template-rows:0fr'), '收起用 0fr 起手')
-  assert.ok(src.includes('grid-template-rows:1fr'), '展开用 1fr')
-  assert.ok(/transition:grid-template-rows \.26s ease,opacity \.2s ease/.test(src), '应有高度与透明度过渡')
-  assert.ok(src.includes('.ap-detail.open{grid-template-rows:1fr;opacity:1'), 'open 时才展开')
-  assert.ok(src.includes('@keyframes ap-detail-in') && src.includes('@keyframes ap-detail-out'), '展开/收起都有动画（挂载即播）')
-  assert.ok(src.includes('.ap-detail.closing{animation:ap-detail-out'), '收起时播反向动画')
-  assert.ok(src.includes('.ap-detail>div{min-height:0;overflow:hidden}'), '内层要能收干净')
-  // 收起时内容保留 240ms 再卸载
-  assert.ok(src.includes('var [closing, setClosing] = React.useState(-1)'), '要有「正在收起」状态')
-  assert.ok(/setTimeout\(function \(\) \{ setClosing\(-1\)/.test(src), '收起动画结束要清掉内容')
-  assert.ok(/\}, 240\)/.test(src), '收起时长 240ms（比 260ms 的过渡略短）')
-  assert.ok(src.includes("className: 'ap-detail' + (isOpen ? ' open' : '')"), '展开/收起只切 class')
-  assert.ok(src.includes('function toggleRow(i)'), '点击行要改走 toggleRow')
+  assert.ok(src.includes('.ap-note-modal{position:fixed'), '便签应是浮层')
+  assert.ok(src.includes('.ap-note-panel{'), '浮层要有面板')
+  assert.ok(src.includes('.ap-note-head'), '浮层要有标题栏与关闭按钮')
+  assert.ok(src.includes("className: 'ap-note-modal'"), '渲染时挂浮层')
+  assert.ok(src.includes('function toggleRow(i)'), '点击行走 toggleRow')
+  assert.ok(!src.includes("className: 'ap-detail'"), '不再在行内展开')
+  assert.ok(!src.includes('.ap-detail{'), '旧的展开样式应删除')
+  assert.ok(src.includes('e.target === e.currentTarget'), '点遮罩关闭')
 })
 
 test('apply 注册 conversation.view Tab 且 id/order 正确', () => {

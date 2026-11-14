@@ -130,21 +130,25 @@ test('页面脚本可执行：结果表、分页跳转、提示位置都正确',
     '最佳时段应在同一行显示起止时间')
   assert.ok(list.innerHTML.includes('id="pageInput"'), '分页处应出现页码输入框')
   assert.ok(list.innerHTML.includes('跳转'), '分页处应出现跳转按钮')
-  assert.ok(list.innerHTML.includes('推荐度明细与推荐理由'), '行内详情应渲染便签')
+  // 便签已改成浮窗：点击行后才渲染到 #noteHost
+  globalThis.__toggle(0)
+  const note = ctx.doc.getElementById('noteHost').innerHTML
+  assert.ok(note.includes('推荐度明细与推荐理由'), '浮窗里应渲染便签')
+  assert.equal(ctx.doc.getElementById('noteModal').hidden, false, '点击行应打开便签浮窗')
   // 第一行小字：数据库更新时间（彗星库周更）
   const hint = ctx.doc.getElementById('hint').textContent
   assert.match(hint, /^数据库 \d{4}-\d{2}-\d{2}/, '第一行小字应以「数据库 <时间> 更新」开头')
   assert.match(hint, /更新 · 站点库 \d+ 个 · 覆盖 \d+ 个省级行政区/, '数据库时间后面接站点概况')
   // 便签「最高高度」带上最高点那一刻的方位
-  assert.match(list.innerHTML, /最高高度<\/span><b>\d+(\.\d+)?°（[北东南西]+ \d+°）<\/b>/,
+  assert.match(note, /最高高度<\/span><b>\d+(\.\d+)?°（[北东南西]+ \d+°）<\/b>/,
     '最高高度应显示方位（方向名 + 方位角）')
   // 坐标用经纬度表述，而不是 "40.50, 115.83"
-  assert.match(list.innerHTML, /坐标<\/span><b>北纬 \d+\.\d+° · 东经 \d+\.\d+°<\/b>/,
+  assert.match(note, /坐标<\/span><b>北纬 \d+\.\d+° · 东经 \d+\.\d+°<\/b>/,
     '坐标应写成「北纬 xx° · 东经 xx°」')
   // 深空只给赤道仪参数：赤道仪「必须使用」+ 曝光依据
-  assert.ok(list.innerHTML.includes('必须使用'), '深空/行星类赤道仪应为「必须使用」')
-  assert.match(list.innerHTML, /曝光<\/span><b>120 s × 20 张<\/b>/, '深空曝光按赤道仪 120s × 20')
-  assert.match(list.innerHTML, /赤道仪跟踪：单张 120 s，叠加 20 张/, '应写明曝光依据')
+  assert.ok(note.includes('必须使用'), '深空/行星类赤道仪应为「必须使用」')
+  assert.match(note, /曝光<\/span><b>120 s × 20 张<\/b>/, '深空曝光按赤道仪 120s × 20')
+  assert.match(note, /赤道仪跟踪：单张 120 s，叠加 20 张/, '应写明曝光依据')
 
   const stats = ctx.doc.getElementById('stats')
   assert.match(stats.textContent, /候选 \d+ 条/, '应渲染候选统计')
@@ -204,7 +208,8 @@ test('画面模拟：右侧整列，左侧 7 个便签（推荐度占两列）�
   await globalThis.__runPageSearch()
   await new Promise((r) => setTimeout(r, 30))
 
-  const list = ctx.doc.getElementById('list').innerHTML
+  globalThis.__toggle(0)
+  const list = ctx.doc.getElementById('noteHost').innerHTML
   assert.ok(list.includes('notegrid'), '便签应是两列布局')
   const left = list.slice(list.indexOf('class="noteleft"'), list.indexOf('class="noteright"'))
   const right = list.slice(list.indexOf('class="noteright"'))
@@ -237,20 +242,21 @@ test('画面模拟：右侧整列，左侧 7 个便签（推荐度占两列）�
     moveTo: noop, lineTo: noop, arc: noop, fill: noop, stroke: noop, save: noop, restore: noop,
     clip: noop, setLineDash: noop, rect: noop, measureText: () => ({ width: 10 }),
   })
-  ctx.doc.getElementById('det0').classList.remove('open')
+  // 前面读内容时已经开过一次浮窗：先关掉，再测「点开 → 关闭」的完整来回
+  if (!ctx.doc.getElementById('noteModal').hidden) globalThis.__toggle(0)
   assert.doesNotThrow(() => globalThis.__toggle(0))
-  assert.ok(ctx.doc.getElementById('det0').classList.contains('open'), '点开便签应加上 open（CSS 过渡展开）')
+  assert.ok(!ctx.doc.getElementById('noteModal').hidden, '点开便签应打开浮窗')
+  assert.ok(ctx.doc.getElementById('row0').classList.contains('open'), '点开便签应高亮该行')
   assert.equal(globalThis.__simState(0).k, ctx.searchData.ranked[0].sim.startIndex, '默认停在最佳时段开始那一帧')
   assert.equal(globalThis.__simState(0).playing, false, '默认不播放')
 
   // 再点一次收起：class 来回切换，且内容一直在 DOM 里（过渡靠 CSS 高度动画）
   globalThis.__toggle(0)
-  assert.equal(ctx.doc.getElementById('det0').classList.contains('open'), false, '再点一次应收起')
-  const html = page(await search({ eventType: 'milkyway', withSim: false, limit: 1 }), meta())
-  assert.ok(html.includes('grid-template-rows:0fr'), '收起有高度过渡（不是 display 硬切）')
-  assert.ok(html.includes('grid-template-rows:1fr'), '展开有高度过渡')
-  assert.ok(!/id="det\d+" style="display/.test(html), '便签不再用内联 display 硬切')
+  assert.equal(ctx.doc.getElementById('noteModal').hidden, true, '再点一次应关闭浮窗')
+  assert.equal(ctx.doc.getElementById('noteHost').innerHTML, '', '关闭后清空内容，避免后台跑动画')
+  assert.ok(!ctx.doc.getElementById('row0').classList.contains('open'), '关闭后取消行高亮')
   // 画布位图尺寸跟随显示尺寸（按 DPR）：固定 960 被 CSS 拉大时平滑区会出现竖纹
+  const html = page(await search({ eventType: 'milkyway', withSim: false, limit: 1 }), meta())
   assert.ok(html.includes('fitSimCanvas'), '应有画布尺寸自适应')
   assert.ok(html.includes('devicePixelRatio'), '应按设备像素比放大位图')
   assert.ok(/w: canvas\.width,\s*\n?\s*h: canvas\.height/.test(html) || html.includes('w: canvas.width'), '渲染用画布的实际像素尺寸')

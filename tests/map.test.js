@@ -200,3 +200,42 @@ test('自定义点：查询只带坐标，不发 location/province/region', asyn
   const sites = [...new Set(result.ranked.map((item) => item.site.id))]
   assert.deepEqual(sites, ['custom:38.123,93.456'], '结果应只含这个自定义点')
 })
+
+test('地图：底部只留经纬度输入，波特尔/名称已移除', async () => {
+  const { page: buildPage } = await import('../lib/webui.js')
+  const page = buildPage()
+  for (const gone of ['ap-map-bortle', 'ap-map-name', '波特尔 <input', '名称 <input']) {
+    assert.ok(!page.includes(gone), `地图不应再有：${gone}`)
+  }
+  assert.ok(page.includes('ap-map-lat') && page.includes('ap-map-lon'), '应有经纬度输入框')
+})
+
+test('经纬度解析：小数与角分秒都支持', async () => {
+  const { MAP_SRC } = await import('../lib/mapview.js')
+  const sandbox = {}
+  new Function('window', MAP_SRC)(sandbox)
+  const parse = sandbox.__apMap.parseCoord
+  assert.equal(parse('39.9042', 'lat'), 39.9042)
+  assert.equal(parse('-118.5', 'lon'), -118.5)
+  assert.ok(Math.abs(parse('39°54′15.2″N', 'lat') - 39.904222) < 1e-6)
+  assert.ok(Math.abs(parse('39 54 15 N', 'lat') - 39.904167) < 1e-6)
+  assert.ok(Math.abs(parse('39:54:15', 'lat') - 39.904167) < 1e-6)
+  assert.ok(Math.abs(parse('116°24′27″E', 'lon') - 116.4075) < 1e-6)
+  assert.equal(parse('39.9 S', 'lat'), -39.9)
+  assert.equal(parse('116 W', 'lon'), -116)
+  assert.equal(parse('95', 'lat'), null, '纬度超范围应为 null')
+  assert.equal(parse('abc', 'lat'), null)
+  assert.equal(parse('39°61′00″', 'lat'), null, '分/秒需小于 60')
+  assert.equal(sandbox.__apMap.formatCoord(39.9042), '39.904200')
+})
+
+test('便签：页面用浮窗渲染，行内不再有 detail', async () => {
+  const { page: buildPage } = await import('../lib/webui.js')
+  const page = buildPage()
+  assert.ok(page.includes('id="noteModal"'), '应有便签浮窗')
+  assert.ok(page.includes('ap-note-panel'), '应有面板样式')
+  assert.ok(!/class="detail"/.test(page), '行内详情应已移除')
+  assert.ok(page.includes('function closeNote()'), '应有关闭入口')
+  const client = read('lib/client.js')
+  assert.ok(client.includes("className: 'ap-note-modal'"), 'Tab 也应浮窗')
+})
