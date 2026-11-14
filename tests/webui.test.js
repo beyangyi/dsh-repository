@@ -66,6 +66,7 @@ async function runPage() {
   const store = new Map()
   const sandbox = {
     document: doc,
+    window: {},
     localStorage: {
       getItem: (k) => (store.has(k) ? store.get(k) : null),
       setItem: (k, v) => store.set(k, v),
@@ -86,7 +87,9 @@ async function runPage() {
       + ' globalThis.__simWheel = simWheel; globalThis.__zoomSim = zoomSim; globalThis.__setMode = setMode;'
       + ' globalThis.__toggleTrack = toggleTrack;'
       + ' globalThis.__simReset = simReset; globalThis.__toggleSim = toggleSim; globalThis.__seekSim = seekSim;'
-      + ' globalThis.__simState = function (i) { return sims[i]; };\n')
+      + ' globalThis.__simState = function (i) { return sims[i]; };'
+      + ' globalThis.__selectSite = selectSite; globalThis.__onProvinceChange = onProvinceChange;'
+      + ' globalThis.__onSiteChange = onSiteChange; globalThis.__onRegionChange = onRegionChange;\n')
   assert.ok(source.includes('__bootPromise'), '应该能接管 boot() 的 Promise')
   const fn = new Function(...Object.keys(sandbox), source)
   fn(...Object.values(sandbox))
@@ -408,4 +411,31 @@ test('页面脚本：便签里日食不出现被忽略的维度', async () => {
   // 只做静态检查：渲染函数用 gradeRows 过滤 ignored
   assert.ok(html.includes('function gradeRows'), '应通过 gradeRows 统一过滤维度')
   assert.ok(html.includes('ignored.indexOf'), '应按 breakdown.ignored 跳过维度')
+})
+
+test('三级联动：地图选站点 → 地区/省份/地点 自动选中', async () => {
+  const ctx = await runPage()
+  await globalThis.__bootPromise
+  globalThis.__selectSite('haituo')
+  assert.equal(ctx.doc.getElementById('region').value, '华北', '地区应自动选中')
+  assert.equal(ctx.doc.getElementById('province').value, '北京', '省份应自动选中')
+  assert.equal(ctx.doc.getElementById('site').value, 'haituo', '地点应自动选中')
+})
+
+test('三级联动：选省份 → 自动选地区并清空地点', async () => {
+  const ctx = await runPage()
+  await globalThis.__bootPromise
+  ctx.doc.getElementById('province').value = '青海'
+  globalThis.__onProvinceChange()
+  assert.equal(ctx.doc.getElementById('region').value, '西北', '省份所在地区应自动选中')
+  assert.equal(ctx.doc.getElementById('site').value, '', '地点应被清空')
+})
+
+test('三级联动：下拉选地点 → 自动补地区与省份', async () => {
+  const ctx = await runPage()
+  await globalThis.__bootPromise
+  ctx.doc.getElementById('site').value = 'haituo'
+  globalThis.__onSiteChange()
+  assert.equal(ctx.doc.getElementById('region').value, '华北')
+  assert.equal(ctx.doc.getElementById('province').value, '北京')
 })

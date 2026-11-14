@@ -110,9 +110,11 @@ test('地点搜索：远端解析与超时降级', async () => {
 })
 
 test('瓦片代理：参数校验、缓存命中与失败降级', async () => {
-  assert.deepEqual(TILE_STYLES.sort(), ['street', 'topo'])
+  assert.deepEqual(TILE_STYLES.sort(), ['topo'])
   const bad = await getTile('topo', 2, 0, 0)
   assert.equal(bad.status, 400)
+  const street = await getTile('street', 6, 52, 23)
+  assert.equal(street.status, 400, '普通底图已移除，应返回 400')
   const badXY = await getTile('topo', 5, 99, 0)
   assert.equal(badXY.status, 400)
 
@@ -139,7 +141,7 @@ test('瓦片代理：参数校验、缓存命中与失败降级', async () => {
   globalThis.fetch = async () => { throw new Error('offline') }
   try {
     resetTileMemory()
-    const failed = await getTile('street', 7, 100, 50)
+    const failed = await getTile('topo', 7, 100, 50)
     assert.equal(failed.status, 502)
   } finally {
     globalThis.fetch = realFetch
@@ -147,14 +149,34 @@ test('瓦片代理：参数校验、缓存命中与失败降级', async () => {
   }
 })
 
-test('界面：页面与会话 Tab 都有地图选点、底图切换与地点搜索', async () => {
+test('界面：地图只剩地形底图、点站点选中、无搜索/无设为出发地', async () => {
   const { page: buildPage } = await import('../lib/webui.js')
   const page = buildPage()
-  for (const keyword of ['地图选点', '__apMap', 'ap-map-style', '地形', '普通', 'mapModal', "siteLat"]) {
+  for (const keyword of ['地图选点', '__apMap', 'ap-map-pick-label', 'ap-map-title', 'mapModal', 'siteLat', 'onSiteChange', 'onProvinceChange', 'selectSite']) {
     assert.ok(page.includes(keyword), `页面缺少：${keyword}`)
   }
+  for (const gone of ['ap-map-q', 'ap-map-style', '把此点设为出发地', 'ap-map-setorigin', 'ap-map-result']) {
+    assert.ok(!page.includes(gone), `页面不应再有：${gone}`)
+  }
   const client = read('lib/client.js')
-  for (const keyword of ['地图选点', '__apMap', 'ap-map-modal', 'customPoint', "qs.set('siteLat'"]) {
+  for (const keyword of ['地图选点', '__apMap', 'ap-map-modal', 'customPoint', "qs.set('siteLat'", "result.kind === 'site'", 'ap-map-pick-label']) {
     assert.ok(client.includes(keyword), `Tab 缺少：${keyword}`)
   }
+  for (const gone of ['ap-map-q', 'ap-map-style', '把此点设为出发地']) {
+    assert.ok(!client.includes(gone), `Tab 不应再有：${gone}`)
+  }
+})
+
+test('手势：松手才算选点，拖动只平移', () => {
+  const src = read('lib/mapview.js')
+  assert.ok(src.includes('DRAG_THRESHOLD = 4'), '拖动阈值应为 4px')
+  assert.ok(src.includes("addEventListener('pointerdown'"))
+  assert.ok(src.includes("addEventListener('pointermove'"))
+  assert.ok(src.includes("addEventListener('pointerup'"))
+  assert.ok(/if \(dragged\) return/.test(src), '拖动结束时不应选点')
+  assert.ok(src.includes('selectAt('), '选点入口存在')
+  assert.ok(!/state\.center = \{ lat: point\.lat/.test(src), '选点后不应把视野跳到点击处')
+  // 站点选中只在「确定」里回调宿主
+  const okBlock = src.slice(src.indexOf("ap-map-ok'").slice)
+  assert.ok(okBlock.includes("kind: 'site'"), '确定按钮应处理站点结果')
 })
