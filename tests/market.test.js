@@ -66,14 +66,14 @@ test('账号迁移：仓库地址全部指向新账号，且没有旧账号残�
   }
 })
 
-test('版本：package.json 与 README / 指南 / 索引一致为 0.1.3', () => {
-  assert.equal(pkg.version, '0.1.3')
+test('版本：package.json 与 README / 指南 / 索引一致为 0.2.0', () => {
+  assert.equal(pkg.version, '0.2.0')
   const readme = readFileSync(join(ROOT, 'README.md'), 'utf8')
-  assert.ok(readme.includes('dsh-astro-plan@0.1.3'), 'README 安装命令应为 0.1.3')
+  assert.ok(readme.includes('dsh-astro-plan@0.2.0'), 'README 安装命令应为 0.2.0')
   assert.ok(!readme.includes('0.29.0'), 'README 不应残留旧版本号')
   const guide = readFileSync(join(ROOT, 'docs', 'user-guide.md'), 'utf8')
-  assert.ok(guide.includes('0.1.3'), '指南应写 0.1.3')
-  assert.equal(index.plugins[0].versions[0].version, '0.1.3', '索引最新版本应为 0.1.3')
+  assert.ok(guide.includes('0.2.0'), '指南应写 0.2.0')
+  assert.equal(index.plugins[0].versions[0].version, '0.2.0', '索引最新版本应为 0.2.0')
 })
 
 test('可发布：非 private、公开访问、包里带齐 lib 与 patch', () => {
