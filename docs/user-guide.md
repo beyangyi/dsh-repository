@@ -46,7 +46,7 @@
 ```bash
 # 1) 插件市场：插件 → 发现 → 添加索引 → 粘贴索引地址 → 安装「星野计划」
 # 2) npm
-dsh plugin --profile desktop add dsh-astro-plan@0.1.1
+dsh plugin --profile desktop add dsh-astro-plan@0.1.2
 # 3) 本地目录（开发用）
 dsh plugin --profile desktop add "<本目录绝对路径>"
 ```
@@ -356,4 +356,4 @@ curl "http://127.0.0.1:<端口>/astro-plan/api/search?...&withSim=0"
 
 ---
 
-**版本**：0.1.1 · **许可**：MIT · **作者**：Sirius YANG
+**版本**：0.1.2 · **许可**：MIT · **作者**：Sirius YANG

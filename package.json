@@ -1,6 +1,6 @@
 {
   "name": "dsh-astro-plan",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "星野计划（by Sirius YANG）：按 18 类天象与深空目标、全国 173 站、最长一年检索，结合光污染、方位、月相、星历事件与 7 天天气，给出推荐排序、地景、焦段与曝光；每条结果附 Stellarium 风格 3D 天球画面模拟（真实银河等值线、真实月相、实测天际线）。",
   "type": "module",
   "main": "lib/index.js",

@@ -24,6 +24,8 @@ const excludes = process.argv
   .filter((arg) => arg.startsWith('--exclude='))
   .map((arg) => arg.slice('--exclude='.length).replace(/\\/gu, '/').replace(/\/+$/u, ''))
   .filter(Boolean)
+/** --message="提交说明" 覆盖默认提交信息。 */
+const messageOverride = (process.argv.find((arg) => arg.startsWith('--message=')) ?? '').slice('--message='.length)
 const excluded = (rel) => excludes.some((prefix) => rel === prefix || rel.startsWith(prefix + '/') || rel.startsWith(prefix))
 const READ_ONLY_HINT = '令牌是只读的（或没有写入权限）：请改用你自己的凭据推送 —— GitHub 网页 Add file / GitHub Desktop / SSH。'
 
@@ -140,7 +142,7 @@ if (tree.sha === parent.tree.sha) {
 const commit = await api(`/repos/${owner}/${repo}/git/commits`, {
   method: 'POST',
   body: JSON.stringify({
-    message: `feat: 源码入库（${pkg.name}@${pkg.version}）\n\n用户指南见 docs/user-guide.md；收录条目见 awesome-dsh-plugin。`,
+    message: messageOverride || `feat: 源码入库（${pkg.name}@${pkg.version}）\n\n用户指南见 docs/user-guide.md；收录条目见 awesome-dsh-plugin。`,
     tree: tree.sha,
     parents: [parentSha],
   }),
