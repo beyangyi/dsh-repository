@@ -1,7 +1,13 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 
+import { readFileSync } from 'node:fs'
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
 import { installApi } from '../lib/api.js'
+
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 
 function fakeCtx() {
   const captured = {}
@@ -355,4 +361,56 @@ test('meta 暴露数据库更新时间，页面第一行小字显示它', async 
   assert.match(out.body, /'数据库 '\+dbUpdated\+' 更新 · 站点库 '/,
     '顶部第一行小字应以「数据库 … 更新」开头')
   assert.match(out.body, /var dbUpdated = \(m\.database && m\.database\.updatedAtText\)/, '时间来自 meta.database')
+})
+
+test('地图选点：siteLat/siteLon 经 HTTP 透传，只出该自定义点（回归）', async () => {
+  const ctx = fakeCtx()
+  installApi(ctx)
+  const out = await invoke(ctx.captured.route,
+    '/astro-plan/api/search?eventType=any&dateStart=2026-11-17&dateEnd=2026-11-18&siteLat=38.123&siteLon=93.456&pageSize=5')
+  assert.equal(out.status, 200)
+  const json = JSON.parse(out.body)
+  assert.ok(json.ok)
+  assert.ok(json.ranked.length > 0)
+  const ids = [...new Set(json.ranked.map((item) => item.site.id))]
+  assert.deepEqual(ids, ['custom:38.123,93.456'], '结果只能含这个自定义点，不能回落成 173 个预设站点')
+  assert.equal(json.ranked[0].site.custom, true)
+})
+
+test('地图选点：siteBortle 与 siteName 也会透传', async () => {
+  const ctx = fakeCtx()
+  installApi(ctx)
+  const out = await invoke(ctx.captured.route,
+    '/astro-plan/api/search?eventType=any&dateStart=2026-11-17&dateEnd=2026-11-18&siteLat=38.123&siteLon=93.456&siteBortle=2&siteName=' + encodeURIComponent('测试点') + '&pageSize=3')
+  const json = JSON.parse(out.body)
+  assert.ok(json.ok)
+  assert.equal(json.ranked[0].site.bortle, 2)
+  assert.equal(json.ranked[0].site.name, '测试点')
+})
+
+test('地图选点：非法坐标返回 bad_coords', async () => {
+  const ctx = fakeCtx()
+  installApi(ctx)
+  const out = await invoke(ctx.captured.route,
+    '/astro-plan/api/search?eventType=any&dateStart=2026-11-17&dateEnd=2026-11-18&siteLat=999&siteLon=0')
+  assert.equal(out.status, 400)
+  assert.equal(JSON.parse(out.body).error, 'bad_coords')
+})
+
+test('时间轴：可用坐标代替站点 id', async () => {
+  const ctx = fakeCtx()
+  installApi(ctx)
+  const out = await invoke(ctx.captured.route,
+    '/astro-plan/api/night?siteLat=38.123&siteLon=93.456&date=2026-11-17')
+  assert.equal(out.status, 200)
+  const json = JSON.parse(out.body)
+  assert.ok(json.ok)
+  assert.equal(json.site.custom, true)
+})
+
+test('参数白名单：地图选点的四个参数都在 queryToOptions 里', () => {
+  const src = readFileSync(join(ROOT, 'lib', 'api.js'), 'utf8')
+  for (const key of ['siteLat', 'siteLon', 'siteBortle', 'siteName']) {
+    assert.ok(src.includes(`'${key}'`), `queryToOptions 缺少 ${key}`)
+  }
 })
